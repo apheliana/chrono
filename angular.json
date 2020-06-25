@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "chrono"
+    }
+  },
+  "defaultProject": "chrono",
+  "cli": {
+    "analytics": "ee71109a-bf5b-4cbe-8420-3751b0bd8641"
+  }
 }
