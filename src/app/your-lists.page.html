@@ -28,37 +28,49 @@
     <input matInput placeholder="URL?" [(ngModel)]="titleURL" />
   </mat-form-field>
   <br>
+
   <mat-form-field>
     <mat-label>Where do you want to add this?</mat-label>
-    <mat-select [formControl]="lists" multiple>
-      <mat-select-trigger>
-        {{lists.value ? lists.value[0] : ''}}
-        <span *ngIf="lists.value?.length > 1" class="selection">
-          (+{{lists.value.length - 1}} {{lists.value?.length === 2 ? 'other' : 'others'}})
-        </span>
-      </mat-select-trigger>
-      <mat-option *ngFor="let lists of listOfLists" [value]="lists">{{lists}}</mat-option>
+    <mat-select [(ngModel)]="whichList">
+      <mat-option *ngFor="let yourList of yourLists" [value]="yourList.id">
+        {{yourList.name}}
+      </mat-option>
     </mat-select>
   </mat-form-field>
+
   <br>
   <mat-form-field appearance="fill">
-    <mat-label>When did you read/study this?</mat-label>
+    <mat-label>When did you read this?</mat-label>
     <input matInput [matDatepicker]="picker" [(ngModel)]="dateActual">
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
 </div>
+<br>
 <div>
 <button mat-raised-button color="primary" (click)="addNewListItem()">Add to List</button>
 </div>
-
-
-<div>
+<br>
+<div *ngIf = "viewLists == 'yes' else noData">
   <h3>A list of Your Lists</h3>
-</div>
 
 <ul>
-  <li>List Name: Call list.name</li>
-  <li>Date Updated: Call list.lastupdate</li>
-  <li>No of items: Call list.noOfListItems</li>
+  <li *ngFor="let yourList of yourLists"> {{yourList.id}} - {{yourList.name}}</li>
 </ul>
+</div>
+
+<div *ngIf = "viewListItems == 'yes' else noData">
+  <h3>Items of Your Lists</h3>
+
+<ul>
+  <li *ngFor="let yourListItem of yourListItems"> {{yourListItem.id}} - {{yourListItem.listId}} - {{yourListItem.titleText}}</li>
+</ul>
+</div>
+
+<ng-template #noData>
+  <div>
+    <ul>
+      <li>Please add new data.</li>
+    </ul>
+  </div>
+</ng-template>
