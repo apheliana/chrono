@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
 import {FormControl} from '@angular/forms';
-import {parseISO} from 'date-fns';
+//import {format, parseISO} from 'date-fns'; //for printing a more user friendly date on screen
 
 
 @Component({
@@ -9,36 +9,46 @@ import {parseISO} from 'date-fns';
   styleUrls: ['./your-lists.page.scss'],
 })
 export class YourListsComponent {
-  dateActualText : string = '';
+  dateActual: Date;
   listName: string = '';
   titleText: string = '';
   titleURL: string = '';
   lists = new FormControl();
   listOfLists: string[] = ['Articles', 'Books', 'TV Shows'];
+  myListItem: ListItem[];
+  myList: List[];
   
 
   constructor() {
-
+    !this.myList ? console.log('do nothing') : console.log('show table');
+    !this.myListItem ? console.log('no list item') : console.log('list item constructed');
+  }
+  
+  addNewListItem(): void {
     const myListItem = new ListItem();
     myListItem.id = 0;
     myListItem.listId = 123;
     myListItem.titleText = this.titleText;
     myListItem.titleURL = this.titleURL;
-    myListItem.dateActual = parseISO(this.dateActualText);
+    myListItem.dateActual = this.dateActual;
     myListItem.dateCreated = new Date();
     myListItem.dateModified = new Date();
     myListItem.dateDeleted = new Date();
+    console.log('list item:', myListItem); 
+  }
 
+  addNewList(): void {
     const myList = new List();
     myList.id = 123;
     myList.name = this.listName;
-    //myList.listItem.push(myListItem);
     myList.dateCreated = new Date();
     myList.dateModified = new Date();
     myList.dateDeleted = new Date();
-
+    console.log('list:', myList);
   }
 }
+
+
 
 export class List {
   id: number; //unique //find the last id then add 1
