@@ -3,13 +3,13 @@
     Make A List
   </h2>
 
-<mat-form-field>
-  <mat-label>What's your list name?</mat-label>
-  <input matInput placeholder="Name?" [(ngModel)]="listName" />
-</mat-form-field>
-<br>
-<div>
-  <button mat-raised-button color="primary" (click)="addNewList()">New List</button>
+  <mat-form-field>
+    <mat-label>What's your list name?</mat-label>
+    <input matInput placeholder="Name?" [(ngModel)]="listName" />
+  </mat-form-field>
+  <br>
+  <div>
+    <button mat-raised-button color="primary" (click)="addNewList()">New List</button>
   </div>
 </div>
 
@@ -32,8 +32,8 @@
   <mat-form-field>
     <mat-label>Where do you want to add this?</mat-label>
     <mat-select [(ngModel)]="whichList">
-      <mat-option *ngFor="let yourList of yourLists" [value]="yourList.id">
-        {{yourList.name}}
+      <mat-option *ngFor="let yourList of lists" [value]="yourList.id">
+        {{ yourList.name }}
       </mat-option>
     </mat-select>
   </mat-form-field>
@@ -48,23 +48,24 @@
 </div>
 <br>
 <div>
-<button mat-raised-button color="primary" (click)="addNewListItem()">Add to List</button>
+  <button mat-raised-button color="primary" (click)="addNewListItem()">Add to List</button>
 </div>
 <br>
-<div *ngIf = "viewLists == 'yes' else noData">
+<div *ngIf="lists.length > 0 else noData">
   <h3>A list of Your Lists</h3>
 
-<ul>
-  <li *ngFor="let yourList of yourLists"> {{yourList.id}} - {{yourList.name}}</li>
-</ul>
+  <ul>
+    <li *ngFor="let yourList of lists"> {{ yourList.id }} - {{ yourList.name }}</li>
+  </ul>
 </div>
 
-<div *ngIf = "viewListItems == 'yes' else noData">
+<div *ngIf="viewListItems == 'yes' else noData">
   <h3>Items of Your Lists</h3>
 
-<ul>
-  <li *ngFor="let yourListItem of yourListItems"> {{yourListItem.id}} - {{yourListItem.listId}} - {{yourListItem.titleText}}</li>
-</ul>
+  <ul>
+    <li *ngFor="let yourListItem of yourListItems">
+      {{ yourListItem.id }} - {{ yourListItem.listId }} - {{ yourListItem.titleText }}</li>
+  </ul>
 </div>
 
 <ng-template #noData>
