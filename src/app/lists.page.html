@@ -1,0 +1,31 @@
+<div>
+  <h2>
+    Create a list
+  </h2>
+
+  <mat-form-field>
+    <mat-label>What's your list name?</mat-label>
+    <input matInput placeholder="Name?" [(ngModel)]="listName" />
+  </mat-form-field>
+  <br>
+  <div>
+    <button mat-raised-button color="primary" (click)="createList()">Create</button>
+  </div>
+</div>
+
+<div *ngIf="lists.length > 0 else noData">
+  <h3>Your lists</h3>
+  <ul>
+    <li *ngFor="let list of lists">
+      <a routerLink="/list/{{ list.id }}">{{ list.name }}</a>
+    </li>
+  </ul>
+</div>
+
+<ng-template #noData>
+  <div>
+    <ul>
+      <li>You have no lists yet 😱</li>
+    </ul>
+  </div>
+</ng-template>

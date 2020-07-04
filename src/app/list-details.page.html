@@ -1,0 +1,42 @@
+<h2>
+  List details: {{ selectedList.name }}
+</h2>
+
+<div *ngIf="selectedList.listItems.length > 0 else noData">
+  <h3>Items of your list</h3>
+  <ul>
+    <li *ngFor="let item of selectedList.listItems">
+      {{ item.entryText }}
+    </li>
+  </ul>
+</div>
+
+<ng-template #noData>
+  <div>
+    <ul>
+      <li>You have no entries yet 😱</li>
+    </ul>
+  </div>
+</ng-template>
+
+<hr />
+
+<h2>
+  Create a new entry
+</h2>
+
+<div class="create-entry">
+  <mat-form-field>
+    <mat-label>Title?</mat-label>
+    <input matInput placeholder="Title?" [(ngModel)]="entryText" />
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Entry date</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="entryDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" (click)="createEntry()">Add to List</button>
+</div>

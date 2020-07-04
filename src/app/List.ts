@@ -1,4 +1,4 @@
-import { ListItem } from "./ListItem";
+import { ListItem } from "./list-item";
 
 export class List {
     id = 0;
@@ -6,5 +6,5 @@ export class List {
     createdOn = new Date();
     modifiedOn = new Date();
     deletedOn?: Date = null;
-    listItems: ListItem[] = []; 
+    listItems: ListItem[] = [];
 }

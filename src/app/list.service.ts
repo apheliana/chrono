@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { List } from './List';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ListItem } from './ListItem';
+import { ListItem } from './list-item';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
-
+  private readonly localStorageKey = '@forCrowd/chrono/data'
   lists: List[] = [];
 
   constructor() {
@@ -33,54 +33,44 @@ export class ListService {
     );
   }
 
-  createListItem(selectedList: List, titleText: string): Observable<List> {
-
-    const newListItem = new ListItem();
-
-    newListItem.id = 0;
-    newListItem.entryText = titleText;
+  createEntry(selectedList: List, entryText: string, entryDate: Date): Observable<List> {
+    const newEntry = new ListItem();
+    newEntry.entryText = entryText;
+    newEntry.entryDate = entryDate;
+    // TODO This will be solved 👇
     //newListItem.list = selectedList;
-    newListItem.listId = selectedList.id;
-    selectedList.listItems.push(newListItem);
+    newEntry.listId = selectedList.id;
+    selectedList.listItems.push(newEntry);
+
+    // TODO We may have to sort the items when there's a new entry
 
     return this.save().pipe(
       map(() => selectedList)
     );
   }
 
-  private init(): void {
-    const yourListsJSON = localStorage.getItem('chrono-lists');
-    const yourLists = JSON.parse(yourListsJSON) as List[];
+  getListById(listId: number): List {
+    // TODO listId validation
+    return this.lists.find(list => list.id === listId);
+  }
 
-    if (yourLists !== null) {
-      this.lists = yourLists.map(dataItem => {
+  private init(): void {
+    const appDataJSON = localStorage.getItem(this.localStorageKey);
+    const appDataLists = JSON.parse(appDataJSON) as List[];
+
+    if (appDataLists !== null) {
+      this.lists = appDataLists.map(dataList => {
         const list = new List();
-        list.id = dataItem.id;
-        list.name = dataItem.name;
-        list.listItems = dataItem.listItems;
+        list.id = dataList.id;
+        list.name = dataList.name;
+        list.listItems = dataList.listItems;
         return list;
       });
     }
-
-    // TODO This block shouldn't be necessary, since when we save/load lists, it should already take care of its child items
-
-    // const yourListItemsJSON = localStorage.getItem('your-list-items');
-    // const yourListItems = JSON.parse(yourListItemsJSON) as ListItem[];
-
-    // if (yourListItems !== null) {
-    //   this.yourListItems = yourListItems.map(dataItem => {
-    //     const yourListItem = new ListItem();
-    //     yourListItem.id = dataItem.id;
-    //     if (dataItem.id >= this.listItemIdCounter) { this.listItemIdCounter = dataItem.id + 1; }
-    //     yourListItem.listId = dataItem.listId;
-    //     yourListItem.entryText = dataItem.entryText;
-    //     return yourListItem;
-    //   });
-    // }   
   }
 
   private save(): Observable<void> {
-    localStorage.setItem('chrono-lists', JSON.stringify(this.lists));
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.lists));
     return of(null);
   }
 }

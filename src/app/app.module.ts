@@ -16,12 +16,14 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { MatButtonModule } from '@angular/material/button';
 
 //pages
-import { YourListsComponent } from './your-lists.page';
+import { ListsPage } from './lists.page';
+import { ListDetailsPage } from './list-details.page';
 
 @NgModule({
   declarations: [
     AppComponent,
-    YourListsComponent,
+    ListDetailsPage,
+    ListsPage,
   ],
   imports: [
     BrowserModule,
