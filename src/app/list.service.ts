@@ -33,6 +33,21 @@ export class ListService {
     );
   }
 
+  createListItem(selectedList: List, titleText: string): Observable<List> {
+
+    const newListItem = new ListItem();
+
+    newListItem.id = 0;
+    newListItem.entryText = titleText;
+    //newListItem.list = selectedList;
+    newListItem.listId = selectedList.id;
+    selectedList.listItems.push(newListItem);
+
+    return this.save().pipe(
+      map(() => selectedList)
+    );
+  }
+
   private init(): void {
     const yourListsJSON = localStorage.getItem('chrono-lists');
     const yourLists = JSON.parse(yourListsJSON) as List[];
@@ -42,6 +57,7 @@ export class ListService {
         const list = new List();
         list.id = dataItem.id;
         list.name = dataItem.name;
+        list.listItems = dataItem.listItems;
         return list;
       });
     }

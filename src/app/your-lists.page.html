@@ -31,8 +31,8 @@
 
   <mat-form-field>
     <mat-label>Where do you want to add this?</mat-label>
-    <mat-select [(ngModel)]="whichList">
-      <mat-option *ngFor="let yourList of lists" [value]="yourList.id">
+    <mat-select [(ngModel)]="selectedList">
+      <mat-option *ngFor="let yourList of lists" [value]="yourList">
         {{ yourList.name }}
       </mat-option>
     </mat-select>

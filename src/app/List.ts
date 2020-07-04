@@ -6,5 +6,5 @@ export class List {
     createdOn = new Date();
     modifiedOn = new Date();
     deletedOn?: Date = null;
-    listItems: ListItem[];
+    listItems: ListItem[] = []; 
 }

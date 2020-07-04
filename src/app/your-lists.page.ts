@@ -16,7 +16,7 @@ export class YourListsComponent {
   yourListItems: ListItem[] = [];
   listIdCounter: number = 0;
   listItemIdCounter: number = 0;
-  whichList: number = 0;
+  selectedList: List;
   viewListItems: string = 'no';
 
   get lists(): List[] {
@@ -28,6 +28,11 @@ export class YourListsComponent {
 
   addNewListItem(): void {
     // TODO Move this to list.service as createListItem(list: List, entryText, entryDate) 👇
+
+
+    this.listService.createListItem(this.selectedList, this.titleText).subscribe();
+
+
     // const yourListItem = new ListItem();
 
     // yourListItem.id = this.listItemIdCounter;
