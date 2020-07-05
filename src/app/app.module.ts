@@ -1,30 +1,23 @@
 //angular
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-import { AppRoutingModule } from './app-routing.module';
-import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { MatButtonModule } from '@angular/material/button';
+import { MatNativeDateModule } from '@angular/material/core';
 // Angular Material
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatButtonModule } from '@angular/material/button';
-
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { AppRoutingModule } from './app-routing.module';
+import { AppComponent } from './app.component';
+import { ListDetailsPage } from './list-details.page';
 //pages
 import { ListsPage } from './lists.page';
-import { ListDetailsPage } from './list-details.page';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    ListDetailsPage,
-    ListsPage,
-  ],
+  declarations: [AppComponent, ListDetailsPage, ListsPage],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -36,8 +29,8 @@ import { ListDetailsPage } from './list-details.page';
     MatFormFieldModule,
     MatInputModule,
     MatNativeDateModule,
-    MatSelectModule
+    MatSelectModule,
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

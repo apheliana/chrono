@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { List } from './List';
-import { ListService } from './list.service';
 import { ActivatedRoute } from '@angular/router';
+import { List } from './list';
+import { ListService } from './list.service';
 
 @Component({
   templateUrl: './list-details.page.html',
@@ -12,11 +12,10 @@ export class ListDetailsPage implements OnInit {
   entryText: string = '';
   selectedList: List = null;
 
-  constructor(private activatedRoute: ActivatedRoute, private listService: ListService) {
-  }
+  constructor(private activatedRoute: ActivatedRoute, private listService: ListService) {}
 
   ngOnInit(): void {
-    const listIdParam = this.activatedRoute.snapshot.params["list-id"];
+    const listIdParam = this.activatedRoute.snapshot.params['list-id'];
 
     if (!listIdParam) {
       // TODO Handle this..

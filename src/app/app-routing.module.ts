@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
-import { ListsPage } from './lists.page';
+import { RouterModule, Routes } from '@angular/router';
 import { ListDetailsPage } from './list-details.page';
+import { ListsPage } from './lists.page';
 
 const routes: Routes = [
-  { path: "list/:list-id", component: ListDetailsPage },
-  { path: "lists", component: ListsPage },
+  { path: 'list/:list-id', component: ListDetailsPage },
+  { path: 'lists', component: ListsPage },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

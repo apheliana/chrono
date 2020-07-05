@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { List } from './List';
+import { List } from './list';
 import { ListService } from './list.service';
 
 @Component({
@@ -14,8 +14,7 @@ export class ListsPage {
     return this.listService.lists;
   }
 
-  constructor(private listService: ListService) {
-  }
+  constructor(private listService: ListService) {}
 
   createList(): void {
     this.listService.createList(this.listName).subscribe();

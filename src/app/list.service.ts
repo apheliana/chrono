@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { List } from './List';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { List } from './list';
 import { ListItem } from './list-item';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
-  private readonly localStorageKey = '@forCrowd/chrono/data'
+  private readonly localStorageKey = '@forCrowd/chrono/data';
   lists: List[] = [];
 
   constructor() {
@@ -28,9 +28,7 @@ export class ListService {
     newList.name = listName;
     this.lists.push(newList);
 
-    return this.save().pipe(
-      map(() => newList)
-    );
+    return this.save().pipe(map(() => newList));
   }
 
   createEntry(selectedList: List, entryText: string, entryDate: Date): Observable<List> {
@@ -44,14 +42,12 @@ export class ListService {
 
     // TODO We may have to sort the items when there's a new entry
 
-    return this.save().pipe(
-      map(() => selectedList)
-    );
+    return this.save().pipe(map(() => selectedList));
   }
 
   getListById(listId: number): List {
     // TODO listId validation
-    return this.lists.find(list => list.id === listId);
+    return this.lists.find((list) => list.id === listId);
   }
 
   private init(): void {
@@ -59,7 +55,7 @@ export class ListService {
     const appDataLists = JSON.parse(appDataJSON) as List[];
 
     if (appDataLists !== null) {
-      this.lists = appDataLists.map(dataList => {
+      this.lists = appDataLists.map((dataList) => {
         const list = new List();
         list.id = dataList.id;
         list.name = dataList.name;
