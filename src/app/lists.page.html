@@ -15,17 +15,15 @@
 
 <div *ngIf="lists.length > 0 else noData">
   <h3>Your lists</h3>
-  <ul>
-    <li *ngFor="let list of lists">
-      <a routerLink="/list/{{ list.id }}">{{ list.name }}</a>
-    </li>
-  </ul>
-</div>
+  <mat-grid-list cols="4" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let list of lists"><a routerLink="/list/{{ list.id }}">{{ list.name }}</a></mat-grid-tile>
+  </mat-grid-list>
 
-<ng-template #noData>
-  <div>
-    <ul>
-      <li>You have no lists yet 😱</li>
-    </ul>
-  </div>
-</ng-template>
+  <ng-template #noData>
+    <div>
+      <ul>
+        <li>You have no lists yet 😱</li>
+      </ul>
+    </div>
+  </ng-template>
+</div>

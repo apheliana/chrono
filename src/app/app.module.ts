@@ -6,6 +6,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 // Angular Material
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatGridListModule } from '@angular/material/grid-list';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { BrowserModule } from '@angular/platform-browser';
@@ -30,6 +31,7 @@ import { ListsPage } from './lists.page';
     MatInputModule,
     MatNativeDateModule,
     MatSelectModule,
+    MatGridListModule,
   ],
   bootstrap: [AppComponent],
 })

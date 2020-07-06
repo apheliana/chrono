@@ -1,13 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
-h3{
-    text-align: center;
-    background-color: lightgrey;
-    color: purple;
-  } 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+h3 {
+  text-align: center;
+  background-color: lightgrey;
+  color: purple;
+}
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+}
 
 .selection {
   opacity: 0.75;
   font-size: 0.75em;
+}
+
+mat-grid-tile {
+  background: lightblue;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
+  font-size: xx-large;
 }
