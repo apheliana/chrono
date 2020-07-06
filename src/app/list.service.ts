@@ -15,7 +15,7 @@ export class ListService {
     this.init();
   }
 
-  createList(listName: string): Observable<ChronoList> {
+  createList(listName: string, listDescription: string): Observable<ChronoList> {
     // TODO listName validation
 
     const newList = new ChronoList();
@@ -26,6 +26,7 @@ export class ListService {
     }
 
     newList.name = listName;
+    newList.description = listDescription;
     this.lists.push(newList);
 
     return this.save().pipe(map(() => newList));
@@ -59,6 +60,7 @@ export class ListService {
         const list = new ChronoList();
         list.id = dataList.id;
         list.name = dataList.name;
+        list.description = dataList.description;
         list.listItems = dataList.listItems;
         return list;
       });

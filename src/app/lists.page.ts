@@ -8,6 +8,7 @@ import { ListService } from './list.service';
 })
 export class ListsPage {
   listName: string = '';
+  listDescription: string = '';
   selectedList: ChronoList = null;
 
   get lists(): ChronoList[] {
@@ -17,6 +18,6 @@ export class ListsPage {
   constructor(private listService: ListService) {}
 
   createList(): void {
-    this.listService.createList(this.listName).subscribe();
+    this.listService.createList(this.listName, this.listDescription).subscribe();
   }
 }

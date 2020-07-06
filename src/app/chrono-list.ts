@@ -4,6 +4,7 @@ export class ChronoList {
   id = 0;
   name = '';
   createdOn = new Date();
+  description = '';
   modifiedOn = new Date();
   deletedOn?: Date = null;
   listItems: ChronoEntry[] = [];
