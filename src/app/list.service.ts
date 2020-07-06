@@ -1,24 +1,24 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { List } from './list';
-import { ListItem } from './list-item';
+import { ChronoEntry } from './chrono-entry';
+import { ChronoList } from './chrono-list';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
   private readonly localStorageKey = '@forCrowd/chrono/data';
-  lists: List[] = [];
+  lists: ChronoList[] = [];
 
   constructor() {
     this.init();
   }
 
-  createList(listName: string): Observable<List> {
+  createList(listName: string): Observable<ChronoList> {
     // TODO listName validation
 
-    const newList = new List();
+    const newList = new ChronoList();
 
     // TODO Temporary solution until we have a database
     if (this.lists.length > 0) {
@@ -31,8 +31,8 @@ export class ListService {
     return this.save().pipe(map(() => newList));
   }
 
-  createEntry(selectedList: List, entryText: string, entryDate: Date): Observable<List> {
-    const newEntry = new ListItem();
+  createEntry(selectedList: ChronoList, entryText: string, entryDate: Date): Observable<ChronoList> {
+    const newEntry = new ChronoEntry();
     newEntry.entryText = entryText;
     newEntry.entryDate = entryDate;
     // TODO This will be solved 👇
@@ -45,18 +45,18 @@ export class ListService {
     return this.save().pipe(map(() => selectedList));
   }
 
-  getListById(listId: number): List {
+  getListById(listId: number): ChronoList {
     // TODO listId validation
     return this.lists.find((list) => list.id === listId);
   }
 
   private init(): void {
     const appDataJSON = localStorage.getItem(this.localStorageKey);
-    const appDataLists = JSON.parse(appDataJSON) as List[];
+    const appDataLists = JSON.parse(appDataJSON) as ChronoList[];
 
     if (appDataLists !== null) {
       this.lists = appDataLists.map((dataList) => {
-        const list = new List();
+        const list = new ChronoList();
         list.id = dataList.id;
         list.name = dataList.name;
         list.listItems = dataList.listItems;

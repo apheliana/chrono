@@ -1,6 +1,6 @@
-import { List } from './list';
+import { ChronoList } from './chrono-list';
 
-export class ListItem {
+export class ChronoEntry {
   id = 0;
   listId = 0;
   entryText = '';
@@ -11,5 +11,5 @@ export class ListItem {
   modifiedOn = new Date();
   deletedOn: Date = null;
 
-  list: List = null;
+  list: ChronoList = null;
 }

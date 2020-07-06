@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { List } from './list';
+import { ChronoList } from './chrono-list';
 import { ListService } from './list.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { ListService } from './list.service';
 })
 export class ListsPage {
   listName: string = '';
-  selectedList: List = null;
+  selectedList: ChronoList = null;
 
-  get lists(): List[] {
+  get lists(): ChronoList[] {
     return this.listService.lists;
   }
 

@@ -1,16 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { List } from './list';
+import { ChronoList } from './chrono-list';
 import { ListService } from './list.service';
 
 @Component({
-  templateUrl: './list-details.page.html',
-  styleUrls: ['./list-details.page.scss'],
+  templateUrl: './chrono-entry.page.html',
+  styleUrls: ['./chrono-entry.page.scss'],
 })
-export class ListDetailsPage implements OnInit {
+export class ChronoEntryPage implements OnInit {
   entryDate: Date = new Date();
   entryText: string = '';
-  selectedList: List = null;
+  selectedList: ChronoList = null;
 
   constructor(private activatedRoute: ActivatedRoute, private listService: ListService) {}
 

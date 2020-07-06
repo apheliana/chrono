@@ -1,10 +1,10 @@
-import { ListItem } from './list-item';
+import { ChronoEntry } from './chrono-entry';
 
-export class List {
+export class ChronoList {
   id = 0;
   name = '';
   createdOn = new Date();
   modifiedOn = new Date();
   deletedOn?: Date = null;
-  listItems: ListItem[] = [];
+  listItems: ChronoEntry[] = [];
 }

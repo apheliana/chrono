@@ -13,12 +13,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ListDetailsPage } from './list-details.page';
-//pages
+import { ChronoEntryPage } from './chrono-entry.page';
 import { ListsPage } from './lists.page';
 
 @NgModule({
-  declarations: [AppComponent, ListDetailsPage, ListsPage],
+  declarations: [AppComponent, ChronoEntryPage, ListsPage],
   imports: [
     BrowserModule,
     AppRoutingModule,
