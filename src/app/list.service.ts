@@ -8,15 +8,21 @@ import { ChronoList } from './chrono-list';
   providedIn: 'root',
 })
 export class ListService {
-  private readonly localStorageKey = '@forCrowd/chrono/data';
   lists: ChronoList[] = [];
+  private readonly localStorageKey = '@forCrowd/chrono/data';
 
   constructor() {
     this.init();
   }
 
-  createList(listName: string, listDescription: string): Observable<ChronoList> {
-    // TODO listName validation
+  createList(name: string, description: string = null): Observable<ChronoList> {
+    name = (name || '').trim();
+    if (name === null || name === '') {
+      throw new Error('Invalid argument');
+    }
+
+    description = (description || '').trim();
+    if (description === '') description = null;
 
     const newList = new ChronoList();
 
@@ -25,8 +31,8 @@ export class ListService {
       newList.id = this.lists[this.lists.length - 1].id + 1;
     }
 
-    newList.name = listName;
-    newList.description = listDescription;
+    newList.name = name;
+    newList.description = description;
     this.lists.push(newList);
 
     return this.save().pipe(map(() => newList));

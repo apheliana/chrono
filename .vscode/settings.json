@@ -7,5 +7,8 @@
   "typescript.updateImportsOnFileMove.enabled": "always",
   "prettier.ignorePath": ".prettierignore",
   "prettier.useEditorConfig": false,
-  "prettier.requireConfig": true
+  "prettier.requireConfig": true,
+  "cSpell.words": [
+    "Chrono"
+  ]
 }
