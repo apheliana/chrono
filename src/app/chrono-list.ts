@@ -8,4 +8,5 @@ export class ChronoList {
   modifiedOn = new Date();
   deletedOn?: Date = null;
   listItems: ChronoEntry[] = [];
+  numberOfEntries: number = 0;
 }

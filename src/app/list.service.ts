@@ -62,6 +62,7 @@ export class ListService {
         list.name = dataList.name;
         list.description = dataList.description;
         list.listItems = dataList.listItems;
+        list.numberOfEntries = this.countEntries(dataList.listItems);
         return list;
       });
     }
@@ -70,5 +71,15 @@ export class ListService {
   private save(): Observable<void> {
     localStorage.setItem(this.localStorageKey, JSON.stringify(this.lists));
     return of(null);
+  }
+
+  countEntries(obj: Object) {
+    var result = 0;
+    for (var key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        ++result;
+      }
+    }
+    return result;
   }
 }

@@ -21,7 +21,10 @@
 <div *ngIf="lists.length > 0 else noData">
   <h3>Your lists</h3>
   <ul>
-    <li *ngFor="let list of lists"><a routerLink="/list/{{ list.id }}">{{ list.name }}</a> - {{ list.description }}</li>
+    <li *ngFor="let list of lists">
+      <a routerLink="/list/{{ list.id }}">{{ list.name }}</a> - {{ list.description }} - {{ list.numberOfEntries }}
+      Entries
+    </li>
   </ul>
 </div>
 <div>
