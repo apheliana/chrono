@@ -12,7 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChronoEntryPage } from './chrono-entry.page';
-import { CreateNewListDialog, ListsPage } from './lists.page';
+import { CreateNewListDialog } from './CreateNewListDialog';
+import { ListsPage } from './lists.page';
 
 @NgModule({
   declarations: [AppComponent, ChronoEntryPage, ListsPage, CreateNewListDialog],
