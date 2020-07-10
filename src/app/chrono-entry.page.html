@@ -5,6 +5,10 @@
   List Description: {{ selectedList.description }}
 </h4>
 
+<div>
+  <button mat-raised-button color="primary" (click)="openDialog('update')">Update List's Name & Desc</button>
+</div>
+
 <div *ngIf="selectedList.listItems.length > 0 else noData">
   <h3>Items of your list</h3>
   <ul>

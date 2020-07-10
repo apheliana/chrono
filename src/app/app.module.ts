@@ -12,11 +12,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { ChronoEntryPage } from './chrono-entry.page';
-import { CreateNewListDialog } from './CreateNewListDialog';
+import { ListDialog } from './ListDialog';
 import { ListsPage } from './lists.page';
 
 @NgModule({
-  declarations: [AppComponent, ChronoEntryPage, ListsPage, CreateNewListDialog],
+  declarations: [AppComponent, ChronoEntryPage, ListsPage, ListDialog],
   imports: [
     BrowserModule,
     AppRoutingModule,

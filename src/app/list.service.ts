@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChronoEntry } from './chrono-entry';
 import { ChronoList } from './chrono-list';
+import { DialogData } from './DialogData';
 
 @Injectable({
   providedIn: 'root',
@@ -36,6 +37,22 @@ export class ListService {
     this.lists.push(newList);
 
     return this.save().pipe(map(() => newList));
+  }
+
+  updateList(selectedList: ChronoList, data: DialogData): Observable<ChronoList> {
+    data.name = (data.name || '').trim();
+    if (data.name === null || data.name === '') {
+      throw new Error('Invalid argument');
+    }
+
+    data.description = (data.description || '').trim();
+    if (data.description === '') data.description = null;
+
+    selectedList.name = data.name;
+    selectedList.description = data.description;
+    selectedList.modifiedOn = new Date();
+
+    return this.save().pipe(map(() => selectedList));
   }
 
   createEntry(selectedList: ChronoList, entryText: string, entryDate: Date): Observable<ChronoList> {

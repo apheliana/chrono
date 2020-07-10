@@ -1,4 +1,5 @@
 export interface DialogData {
-  listName: string;
-  listDescription: string;
+  name: string;
+  description: string;
+  viewState: string;
 }
