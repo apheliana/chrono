@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
+import { of } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { ChronoList } from './chrono-list';
 import { ListDialogInput } from './list-dialog-input';
 import { ListDialogOutput } from './list-dialog-output';
@@ -38,13 +40,18 @@ export class ChronoEntryPage implements OnInit {
       data: { name: this.selectedList.name, description: this.selectedList.description, viewMode: 'update' },
     });
 
-    dialogRef.afterClosed().subscribe((data: ListDialogOutput) => {
-      if (!data) {
-        return;
-      }
+    dialogRef
+      .afterClosed()
+      .pipe(
+        flatMap((data: ListDialogOutput) => {
+          if (!data) {
+            return of(null);
+          }
 
-      this.listService.updateList(data.name, data.description, this.selectedList);
-    });
+          return this.listService.updateList(data.name, data.description, this.selectedList);
+        })
+      )
+      .subscribe();
   }
 
   // TODO Delete entry?

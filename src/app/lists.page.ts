@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
+import { of } from 'rxjs';
+import { flatMap, tap } from 'rxjs/operators';
 import { ChronoList } from './chrono-list';
 import { ListDialogInput } from './list-dialog-input';
 import { ListDialogOutput } from './list-dialog-output';
@@ -15,19 +18,28 @@ export class ListsPage {
     return this.listService.lists;
   }
 
-  constructor(private listService: ListService, private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private listService: ListService, private router: Router) {}
 
   createListDialog(): void {
     const dialogRef = this.dialog.open<ListDialogComponent, ListDialogInput>(ListDialogComponent, {
       data: { viewMode: 'create' },
     });
 
-    dialogRef.afterClosed().subscribe((data: ListDialogOutput) => {
-      if (!data) {
-        return;
-      }
+    dialogRef
+      .afterClosed()
+      .pipe(
+        flatMap((data: ListDialogOutput) => {
+          if (!data) {
+            return of(null);
+          }
 
-      this.listService.createList(data.name, data.description);
-    });
+          return this.listService.createList(data.name, data.description).pipe(
+            tap((list) => {
+              this.router.navigate(['list', list.id]);
+            })
+          );
+        })
+      )
+      .subscribe();
   }
 }
