@@ -3,7 +3,6 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChronoEntry } from './chrono-entry';
 import { ChronoList } from './chrono-list';
-import { DialogData } from './DialogData';
 
 @Injectable({
   providedIn: 'root',
@@ -14,45 +13,6 @@ export class ListService {
 
   constructor() {
     this.init();
-  }
-
-  createList(name: string, description: string = null): Observable<ChronoList> {
-    name = (name || '').trim();
-    if (name === null || name === '') {
-      throw new Error('Invalid argument');
-    }
-
-    description = (description || '').trim();
-    if (description === '') description = null;
-
-    const newList = new ChronoList();
-
-    // TODO Temporary solution until we have a database
-    if (this.lists.length > 0) {
-      newList.id = this.lists[this.lists.length - 1].id + 1;
-    }
-
-    newList.name = name;
-    newList.description = description;
-    this.lists.push(newList);
-
-    return this.save().pipe(map(() => newList));
-  }
-
-  updateList(selectedList: ChronoList, data: DialogData): Observable<ChronoList> {
-    data.name = (data.name || '').trim();
-    if (data.name === null || data.name === '') {
-      throw new Error('Invalid argument');
-    }
-
-    data.description = (data.description || '').trim();
-    if (data.description === '') data.description = null;
-
-    selectedList.name = data.name;
-    selectedList.description = data.description;
-    selectedList.modifiedOn = new Date();
-
-    return this.save().pipe(map(() => selectedList));
   }
 
   createEntry(selectedList: ChronoList, entryText: string, entryDate: Date): Observable<ChronoList> {
@@ -69,9 +29,49 @@ export class ListService {
     return this.save().pipe(map(() => selectedList));
   }
 
+  createList(name: string, description: string = null): Observable<ChronoList> {
+    return this.createOrUpdateList(name, description);
+  }
+
   getListById(listId: number): ChronoList {
     // TODO listId validation
     return this.lists.find((list) => list.id === listId);
+  }
+
+  updateList(name: string, description: string, list: ChronoList): Observable<ChronoList> {
+    return this.createOrUpdateList(name, description, list);
+  }
+
+  private createOrUpdateList(
+    name: string,
+    description: string = null,
+    list: ChronoList = null
+  ): Observable<ChronoList> {
+    name = (name || '').trim();
+    if (name === null || name === '') {
+      throw new Error('Invalid argument');
+    }
+
+    description = (description || '').trim();
+    if (description === '') description = null;
+
+    if (!list) {
+      list = new ChronoList();
+
+      // TODO Temporary solution until we have a database
+      if (this.lists.length > 0) {
+        list.id = this.lists[this.lists.length - 1].id + 1;
+      }
+
+      this.lists.push(list);
+    } else {
+      list.modifiedOn = new Date();
+    }
+
+    list.name = name;
+    list.description = description;
+
+    return this.save().pipe(map(() => list));
   }
 
   private init(): void {
@@ -84,8 +84,7 @@ export class ListService {
         list.id = dataList.id;
         list.name = dataList.name;
         list.description = dataList.description;
-        list.listItems = dataList.listItems;
-        list.numberOfEntries = dataList.listItems.length;
+        list.listItems = dataList.listItems; // TODO This needs to be updated with object initialization
         return list;
       });
     }

@@ -1,11 +1,26 @@
 :host {
+  li {
+    list-style-type: none;
+  }
+
+  .no-data {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100px;
+
+    // TODO 👇
+    // height: calc(100vh - 68px);
+
+    // button {
+    //   margin-top: 16px;
+    // }
+  }
+
   .create-entry {
     display: flex;
     flex-direction: column;
     width: 450px;
   }
-}
-
-li {
-  list-style-type: none;
 }

@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ChronoList } from './chrono-list';
-import { DialogData } from './DialogData';
+import { ListDialogInput } from './list-dialog-input';
+import { ListDialogOutput } from './list-dialog-output';
+import { ListDialogComponent } from './list-dialog.component';
 import { ListService } from './list.service';
-import { ListDialog } from './ListDialog';
 
 @Component({
   templateUrl: './lists.page.html',
@@ -14,18 +15,18 @@ export class ListsPage {
     return this.listService.lists;
   }
 
-  constructor(private listService: ListService, public dialog: MatDialog) {}
+  constructor(private listService: ListService, private dialog: MatDialog) {}
 
-  openDialog(viewState: string): void {
-    const dialogRef = this.dialog.open(ListDialog, {
-      width: '250px',
-      data: { name: '', description: '', viewState: viewState },
+  createListDialog(): void {
+    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogInput>(ListDialogComponent, {
+      data: { viewMode: 'create' },
     });
 
-    dialogRef.afterClosed().subscribe((data: DialogData) => {
-      if (!data || viewState != 'create') {
+    dialogRef.afterClosed().subscribe((data: ListDialogOutput) => {
+      if (!data) {
         return;
       }
+
       this.listService.createList(data.name, data.description);
     });
   }

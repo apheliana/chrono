@@ -1,3 +1,17 @@
-li {
-  list-style-type: none;
+:host {
+  li {
+    list-style-type: none;
+  }
+
+  .no-data {
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: calc(100vh - 68px);
+
+    button {
+      margin-top: 16px;
+    }
+  }
 }

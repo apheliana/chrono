@@ -9,6 +9,7 @@
   "prettier.useEditorConfig": false,
   "prettier.requireConfig": true,
   "cSpell.words": [
-    "Chrono"
+    "Chrono",
+    "Datepicker"
   ]
 }

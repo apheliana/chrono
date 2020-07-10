@@ -5,9 +5,7 @@
   List Description: {{ selectedList.description }}
 </h4>
 
-<div>
-  <button mat-raised-button color="primary" (click)="openDialog('update')">Update List's Name & Desc</button>
-</div>
+<button mat-raised-button color="primary" (click)="updateListDialog()">Update List</button>
 
 <div *ngIf="selectedList.listItems.length > 0 else noData">
   <h3>Items of your list</h3>
@@ -19,10 +17,10 @@
 </div>
 
 <ng-template #noData>
-  <div>
-    <ul>
-      <li>You have no entries yet 😱</li>
-    </ul>
+  <div class="no-data">
+    You have no entries yet 😱
+    <!-- TODO 👇 -->
+    <!-- <button mat-raised-button color="primary" (click)="createEntryDialog()">Create an entry</button> -->
   </div>
 </ng-template>
 

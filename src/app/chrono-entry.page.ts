@@ -2,9 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute } from '@angular/router';
 import { ChronoList } from './chrono-list';
-import { DialogData } from './DialogData';
+import { ListDialogInput } from './list-dialog-input';
+import { ListDialogOutput } from './list-dialog-output';
+import { ListDialogComponent } from './list-dialog.component';
 import { ListService } from './list.service';
-import { ListDialog } from './ListDialog';
 
 @Component({
   templateUrl: './chrono-entry.page.html',
@@ -15,7 +16,7 @@ export class ChronoEntryPage implements OnInit {
   entryText: string = '';
   selectedList: ChronoList = null;
 
-  constructor(private activatedRoute: ActivatedRoute, private listService: ListService, public dialog: MatDialog) {}
+  constructor(private activatedRoute: ActivatedRoute, private listService: ListService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     const listIdParam = this.activatedRoute.snapshot.params['list-id'];
@@ -32,20 +33,19 @@ export class ChronoEntryPage implements OnInit {
     this.listService.createEntry(this.selectedList, this.entryText, this.entryDate).subscribe();
   }
 
-  openDialog(viewState: string): void {
-    const dialogRef = this.dialog.open(ListDialog, {
-      width: '250px',
-      data: { name: this.selectedList.name, description: this.selectedList.description, viewState: viewState },
+  updateListDialog(): void {
+    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogInput>(ListDialogComponent, {
+      data: { name: this.selectedList.name, description: this.selectedList.description, viewMode: 'update' },
     });
 
-    dialogRef.afterClosed().subscribe((data: DialogData) => {
-      if (!data || viewState != 'update') {
+    dialogRef.afterClosed().subscribe((data: ListDialogOutput) => {
+      if (!data) {
         return;
       }
-      this.listService.updateList(this.selectedList, data);
+
+      this.listService.updateList(data.name, data.description, this.selectedList);
     });
   }
 
-  // TODO Update entry?
   // TODO Delete entry?
 }

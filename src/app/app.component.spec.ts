@@ -15,10 +15,4 @@ describe('AppComponent', () => {
     const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
-
-  it(`should have as title 'chrono forCrowd'`, () => {
-    const fixture = TestBed.createComponent(AppComponent);
-    const component = fixture.componentInstance;
-    expect(component.title).toEqual('chrono forCrowd');
-  });
 });
