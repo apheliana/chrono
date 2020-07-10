@@ -48,7 +48,10 @@ export class ChronoEntryPage implements OnInit {
             return of(null);
           }
 
-          return this.listService.updateList(data.name, data.description, this.selectedList);
+          this.selectedList.name = data.name;
+          this.selectedList.description = data.description;
+
+          return this.listService.save();
         })
       )
       .subscribe();
