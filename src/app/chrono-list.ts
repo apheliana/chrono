@@ -11,7 +11,9 @@ export class ChronoList {
   }
   set description(value: string) {
     value = (value || '').trim();
-    if (value === '') value = null;
+    if (value === '') {
+      value = null;
+    }
 
     this._description = value;
   }

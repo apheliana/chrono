@@ -10,6 +10,12 @@
   "prettier.requireConfig": true,
   "cSpell.words": [
     "Chrono",
-    "Datepicker"
+    "Datepicker",
+    "codelyzer",
+    "eofline",
+    "nospace",
+    "onespace",
+    "paren",
+    "quotemark"
   ]
 }

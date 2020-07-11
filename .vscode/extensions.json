@@ -1,3 +1,8 @@
 {
-  "recommendations": ["angular.ng-template", "esbenp.prettier-vscode", "streetsidesoftware.code-spell-checker"]
+  "recommendations": [
+    "angular.ng-template",
+    "esbenp.prettier-vscode",
+    "ms-vscode.vscode-typescript-tslint-plugin",
+    "streetsidesoftware.code-spell-checker"
+  ]
 }

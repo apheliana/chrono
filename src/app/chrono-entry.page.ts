@@ -15,7 +15,7 @@ import { ListService } from './list.service';
 })
 export class ChronoEntryPage implements OnInit {
   entryDate: Date = new Date();
-  entryText: string = '';
+  entryText = '';
   selectedList: ChronoList = null;
 
   constructor(private activatedRoute: ActivatedRoute, private listService: ListService, private dialog: MatDialog) {}

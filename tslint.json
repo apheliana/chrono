@@ -10,7 +10,7 @@
     "deprecation": {
       "severity": "warning"
     },
-    "component-class-suffix": true,
+    "component-class-suffix": [true, "Component", "Page"],
     "contextual-lifecycle": true,
     "directive-class-suffix": true,
     "directive-selector": [true, "attribute", "app", "camelCase"],
@@ -69,7 +69,7 @@
       ]
     },
     "variable-name": {
-      "options": ["ban-keywords", "check-format", "allow-pascal-case"]
+      "options": ["ban-keywords", "check-format", "allow-leading-underscore", "allow-pascal-case"]
     },
     "whitespace": {
       "options": ["check-branch", "check-decl", "check-operator", "check-separator", "check-type", "check-typecast"]
