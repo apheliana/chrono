@@ -3,6 +3,7 @@ import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChronoEntry } from './chrono-entry';
 import { ChronoList } from './chrono-list';
+import { ChronoListDto } from './chrono-list-dto';
 
 @Injectable({
   providedIn: 'root',
@@ -19,8 +20,6 @@ export class ListService {
     const newEntry = new ChronoEntry();
     newEntry.entryText = entryText;
     newEntry.entryDate = entryDate;
-    // TODO This will be solved 👇
-    //newListItem.list = selectedList;
     newEntry.listId = selectedList.id;
     selectedList.listItems.push(newEntry);
 
@@ -53,13 +52,25 @@ export class ListService {
 
   private init(): void {
     const appDataJSON = localStorage.getItem(this.localStorageKey);
-    const appDataLists = JSON.parse(appDataJSON) as ChronoList[];
+    const appDataLists = JSON.parse(appDataJSON) as ChronoListDto[];
 
     if (appDataLists !== null) {
       this.lists = appDataLists.map((dataList) => {
-        const list = new ChronoList(dataList.id, dataList.name, dataList.description);
-        // TODO CreatedOn, ModifiedOn?
-        list.listItems = dataList.listItems; // TODO This needs to be updated with object initialization
+        const list = new ChronoList(dataList.id, dataList._name, dataList._description);
+        list.createdOn = dataList.createdOn;
+        list.modifiedOn = dataList.modifiedOn;
+        list.deletedOn = dataList.deletedOn;
+        list.listItems = dataList.listItems.map((dataEntry) => {
+          const entry = new ChronoEntry();
+          entry.id = dataEntry.id;
+          entry.listId = dataEntry.listId;
+          entry.entryText = dataEntry.entryText;
+          entry.entryDate = dataEntry.entryDate;
+          entry.createdOn = dataEntry.createdOn;
+          entry.modifiedOn = dataEntry.modifiedOn;
+          entry.deletedOn = dataEntry.deletedOn;
+          return entry;
+        });
         return list;
       });
     }

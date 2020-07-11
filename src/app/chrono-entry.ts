@@ -1,5 +1,4 @@
 import { format } from 'date-fns';
-import { ChronoList } from './chrono-list';
 
 export class ChronoEntry {
   id = 0;
@@ -9,7 +8,8 @@ export class ChronoEntry {
   createdOn = new Date();
   modifiedOn = new Date();
   deletedOn: Date = null;
-  list: ChronoList = null;
+  // TODO This can't be used at the moment, since it throws a "cyclic dependency" error on "save to local storage"
+  // list: ChronoList = null;
 
   get entryDateText(): string {
     return format(this.entryDate, 'dd.MM.yyyy');

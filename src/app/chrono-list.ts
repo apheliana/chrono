@@ -33,7 +33,7 @@ export class ChronoList {
   private _description = '';
   private _name = '';
 
-  constructor(public id: number, private nameInput: string, private descriptionInput: string) {
+  constructor(public id: number, nameInput: string, descriptionInput: string) {
     this.name = nameInput;
     this.description = descriptionInput;
   }
