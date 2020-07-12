@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ChronoEntryPage } from './chrono-entry.page';
+import { EntriesPage } from './entries.page';
 import { ListsPage } from './lists.page';
 
 const routes: Routes = [
-  { path: 'list/:list-id', component: ChronoEntryPage },
+  { path: 'list/:list-id', component: EntriesPage },
   { path: 'lists', component: ListsPage },
 ];
 

@@ -1,26 +1,36 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { ChronoList } from './chrono-list';
+import { EntryDialogInput } from './entry-dialog-input';
+import { EntryDialogOutput } from './entry-dialog-output';
+import { EntryDialogComponent } from './entry-dialog.component';
 import { ListDialogInput } from './list-dialog-input';
 import { ListDialogOutput } from './list-dialog-output';
 import { ListDialogComponent } from './list-dialog.component';
 import { ListService } from './list.service';
 
 @Component({
-  templateUrl: './chrono-entry.page.html',
-  styleUrls: ['./chrono-entry.page.scss'],
+  templateUrl: './entries.page.html',
+  styleUrls: ['./entries.page.scss'],
 })
-export class ChronoEntryPage implements OnInit {
+export class EntriesPage {
   entryDate = new Date();
-  entryText = '';
+  entryTitle = '';
   selectedList: ChronoList = null;
 
-  constructor(private activatedRoute: ActivatedRoute, private listService: ListService, private dialog: MatDialog) {}
+  get lists(): ChronoList[] {
+    return this.listService.lists;
+  }
 
-  ngOnInit(): void {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private listService: ListService,
+    private dialog: MatDialog,
+    private router: Router
+  ) {
     const listIdParam = this.activatedRoute.snapshot.params['list-id'];
 
     if (!listIdParam) {
@@ -31,9 +41,23 @@ export class ChronoEntryPage implements OnInit {
     this.selectedList = this.listService.getListById(listId);
   }
 
-  createEntry(): void {
-    this.listService.createEntry(this.selectedList, this.entryText, this.entryDate).subscribe();
-    this.reset();
+  createEntryDialog(): void {
+    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogInput>(EntryDialogComponent, {
+      data: { viewMode: 'create' },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        flatMap((data: EntryDialogOutput) => {
+          if (!data) {
+            return of(null);
+          }
+
+          return this.listService.createEntry(this.selectedList, data.entryTitle).pipe();
+        })
+      )
+      .subscribe();
   }
 
   updateListDialog(): void {
@@ -59,7 +83,7 @@ export class ChronoEntryPage implements OnInit {
   }
 
   private reset(): void {
-    this.entryText = '';
+    this.entryTitle = '';
     this.entryDate = new Date();
   }
 

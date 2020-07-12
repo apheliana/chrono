@@ -17,11 +17,8 @@ export class ListService {
     this.init();
   }
 
-  createEntry(selectedList: ChronoList, entryText: string, entryDate: Date): Observable<ChronoList> {
-    const newEntry = new ChronoEntry();
-    newEntry.entryText = entryText;
-    newEntry.entryDate = entryDate;
-    newEntry.listId = selectedList.id;
+  createEntry(selectedList: ChronoList, entryTitle: string): Observable<ChronoList> {
+    const newEntry = new ChronoEntry(entryTitle);
     selectedList.listItems.push(newEntry);
 
     // TODO We may have to sort the items when there's a new entry
@@ -62,10 +59,9 @@ export class ListService {
         list.modifiedOn = parseISO(dataList.modifiedOn);
         list.deletedOn = parseISO(dataList.deletedOn);
         list.listItems = dataList.listItems.map((dataEntry) => {
-          const entry = new ChronoEntry();
+          const entry = new ChronoEntry(dataEntry._entryTitle);
           entry.id = dataEntry.id;
           entry.listId = dataEntry.listId;
-          entry.entryText = dataEntry.entryText;
           entry.entryDate = parseISO(dataEntry.entryDate);
           entry.createdOn = parseISO(dataEntry.createdOn);
           entry.modifiedOn = parseISO(dataEntry.modifiedOn);
