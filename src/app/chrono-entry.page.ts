@@ -14,7 +14,7 @@ import { ListService } from './list.service';
   styleUrls: ['./chrono-entry.page.scss'],
 })
 export class ChronoEntryPage implements OnInit {
-  entryDate: Date = new Date();
+  entryDate = new Date();
   entryText = '';
   selectedList: ChronoList = null;
 
@@ -33,6 +33,7 @@ export class ChronoEntryPage implements OnInit {
 
   createEntry(): void {
     this.listService.createEntry(this.selectedList, this.entryText, this.entryDate).subscribe();
+    this.reset();
   }
 
   updateListDialog(): void {
@@ -55,6 +56,11 @@ export class ChronoEntryPage implements OnInit {
         })
       )
       .subscribe();
+  }
+
+  private reset(): void {
+    this.entryText = '';
+    this.entryDate = new Date();
   }
 
   // TODO Delete entry?

@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { parseISO } from 'date-fns';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChronoEntry } from './chrono-entry';
@@ -57,18 +58,18 @@ export class ListService {
     if (appDataLists !== null) {
       this.lists = appDataLists.map((dataList) => {
         const list = new ChronoList(dataList.id, dataList._name, dataList._description);
-        list.createdOn = dataList.createdOn;
-        list.modifiedOn = dataList.modifiedOn;
-        list.deletedOn = dataList.deletedOn;
+        list.createdOn = parseISO(dataList.createdOn);
+        list.modifiedOn = parseISO(dataList.modifiedOn);
+        list.deletedOn = parseISO(dataList.deletedOn);
         list.listItems = dataList.listItems.map((dataEntry) => {
           const entry = new ChronoEntry();
           entry.id = dataEntry.id;
           entry.listId = dataEntry.listId;
           entry.entryText = dataEntry.entryText;
-          entry.entryDate = dataEntry.entryDate;
-          entry.createdOn = dataEntry.createdOn;
-          entry.modifiedOn = dataEntry.modifiedOn;
-          entry.deletedOn = dataEntry.deletedOn;
+          entry.entryDate = parseISO(dataEntry.entryDate);
+          entry.createdOn = parseISO(dataEntry.createdOn);
+          entry.modifiedOn = parseISO(dataEntry.modifiedOn);
+          entry.deletedOn = parseISO(dataEntry.deletedOn);
           return entry;
         });
         return list;

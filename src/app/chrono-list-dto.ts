@@ -1,11 +1,11 @@
-import { ChronoEntry } from './chrono-entry';
+import { ChronoEntryDto } from './chrono-entry-dto';
 
 export interface ChronoListDto {
   _name: string;
   _description: string;
   id: number;
-  createdOn: Date;
-  modifiedOn: Date;
-  deletedOn?: Date;
-  listItems: ChronoEntry[];
+  createdOn: string;
+  modifiedOn: string;
+  deletedOn?: string;
+  listItems: ChronoEntryDto[];
 }
