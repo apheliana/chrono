@@ -8,17 +8,22 @@
     <input matInput placeholder="Title?" [(ngModel)]="data.entryTitle" />
   </mat-form-field>
   <br />
-  <!--mat-form-field appearance="fill">
+  <mat-form-field appearance="fill">
     <mat-label>Entry date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="entryDate" />
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.entryDate" />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
-  </mat-form-field-->
+  </mat-form-field>
 </div>
 <br />
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button mat-button type="submit" color="primary" [mat-dialog-close]="{ entryTitle: data.entryTitle }">
+  <button
+    mat-button
+    type="submit"
+    color="primary"
+    [mat-dialog-close]="{ entryTitle: data.entryTitle, entryDate: data.entryDate }"
+  >
     {{ data.viewMode === 'create' ? 'Create' : 'Update' }}
   </button>
 </div>

@@ -43,7 +43,7 @@ export class EntriesPage {
             return of(null);
           }
 
-          return this.listService.createEntry(this.selectedList, data.entryTitle).pipe();
+          return this.listService.createEntry(this.selectedList, data.entryTitle, data.entryDate).pipe();
         })
       )
       .subscribe();
