@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { ChronoList } from './chrono-list';
@@ -17,20 +17,9 @@ import { ListService } from './list.service';
   styleUrls: ['./entries.page.scss'],
 })
 export class EntriesPage {
-  entryDate = new Date();
-  entryTitle = '';
   selectedList: ChronoList = null;
 
-  get lists(): ChronoList[] {
-    return this.listService.lists;
-  }
-
-  constructor(
-    private activatedRoute: ActivatedRoute,
-    private listService: ListService,
-    private dialog: MatDialog,
-    private router: Router
-  ) {
+  constructor(private activatedRoute: ActivatedRoute, private listService: ListService, private dialog: MatDialog) {
     const listIdParam = this.activatedRoute.snapshot.params['list-id'];
 
     if (!listIdParam) {
@@ -80,11 +69,6 @@ export class EntriesPage {
         })
       )
       .subscribe();
-  }
-
-  private reset(): void {
-    this.entryTitle = '';
-    this.entryDate = new Date();
   }
 
   // TODO Delete entry?
