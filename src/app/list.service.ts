@@ -17,14 +17,14 @@ export class ListService {
     this.init();
   }
 
-  createEntry(selectedList: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoList> {
+  createEntry(selectedList: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
     const newEntry = new ChronoEntry(entryTitle);
     newEntry.entryDate = entryDate;
     selectedList.listItems.push(newEntry);
 
     // TODO We may have to sort the items when there's a new entry
 
-    return this.save().pipe(map(() => selectedList));
+    return this.save().pipe(map(() => newEntry));
   }
 
   createList(name: string, description: string = null): Observable<ChronoList> {

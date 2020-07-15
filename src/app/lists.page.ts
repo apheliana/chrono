@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { ChronoList } from './chrono-list';
-import { ListDialogInput } from './list-dialog-input';
-import { ListDialogOutput } from './list-dialog-output';
+import { ListDialogData } from './list-dialog-data';
+import { ListDialogModel } from './list-dialog-model';
 import { ListDialogComponent } from './list-dialog.component';
 import { ListService } from './list.service';
 
@@ -21,19 +21,25 @@ export class ListsPage {
   constructor(private dialog: MatDialog, private listService: ListService, private router: Router) {}
 
   createListDialog(): void {
-    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogInput>(ListDialogComponent, {
-      data: { viewMode: 'create' },
+    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData>(ListDialogComponent, {
+      data: {
+        model: {
+          name: '',
+          description: '',
+        },
+        viewMode: 'create',
+      },
     });
 
     dialogRef
       .afterClosed()
       .pipe(
-        flatMap((data: ListDialogOutput) => {
-          if (!data) {
+        flatMap((model: ListDialogModel) => {
+          if (!model) {
             return of(null);
           }
 
-          return this.listService.createList(data.name, data.description).pipe(
+          return this.listService.createList(model.name, model.description).pipe(
             tap((list) => {
               this.router.navigate(['list', list.id]);
             })

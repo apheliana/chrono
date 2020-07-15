@@ -5,12 +5,12 @@
 <div class="create-entry">
   <mat-form-field>
     <mat-label>Title?</mat-label>
-    <input matInput placeholder="Title?" [(ngModel)]="data.entryTitle" />
+    <input matInput placeholder="Title?" [(ngModel)]="data.model.entryTitle" />
   </mat-form-field>
   <br />
   <mat-form-field appearance="fill">
     <mat-label>Entry date</mat-label>
-    <input matInput [matDatepicker]="picker" [(ngModel)]="data.entryDate" />
+    <input matInput [matDatepicker]="picker" [(ngModel)]="data.model.entryDate" />
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker></mat-datepicker>
   </mat-form-field>
@@ -18,12 +18,7 @@
 <br />
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Cancel</button>
-  <button
-    mat-button
-    type="submit"
-    color="primary"
-    [mat-dialog-close]="{ entryTitle: data.entryTitle, entryDate: data.entryDate }"
-  >
+  <button mat-button type="submit" color="primary" [mat-dialog-close]="data.model">
     {{ data.viewMode === 'create' ? 'Create' : 'Update' }}
   </button>
 </div>
