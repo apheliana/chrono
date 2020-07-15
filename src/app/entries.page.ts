@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { ChronoList } from './chrono-list';
@@ -19,15 +19,27 @@ import { ListService } from './list.service';
 export class EntriesPage {
   selectedList: ChronoList = null;
 
-  constructor(private activatedRoute: ActivatedRoute, private listService: ListService, private dialog: MatDialog) {
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private listService: ListService,
+    private router: Router
+  ) {
     const listIdParam = this.activatedRoute.snapshot.params['list-id'];
-
     if (!listIdParam) {
-      // TODO Handle this..
+      this.router.navigate(['lists']);
+      return;
     }
 
     const listId = Number(listIdParam);
-    this.selectedList = this.listService.getListById(listId);
+    const list = this.listService.getListById(listId);
+
+    if (!list) {
+      this.router.navigate(['lists']);
+      return;
+    }
+
+    this.selectedList = list;
   }
 
   createEntryDialog(): void {
