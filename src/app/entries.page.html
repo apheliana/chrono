@@ -12,7 +12,8 @@
   <h3>Items of your list</h3>
   <ul>
     <li *ngFor="let item of selectedList.listItems">
-      {{ item.entryTitle }} - {{ item.entryDateText }}
+      {{ item.entryTitle }} - {{ item.entryDateText }} -
+      <button mat-raised-button color="primary" (click)="updateEntryDialog(item)">Update</button>
     </li>
   </ul>
   <button mat-raised-button color="primary" (click)="createEntryDialog()">Create an entry</button>

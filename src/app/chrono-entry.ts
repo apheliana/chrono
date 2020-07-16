@@ -2,7 +2,7 @@ import { format } from 'date-fns';
 
 export class ChronoEntry {
   id = 0;
-  listId: number;
+  listId = 0;
   entryDate = new Date();
   createdOn = new Date();
   modifiedOn = new Date();

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
+import { ChronoEntry } from './chrono-entry';
 import { ChronoList } from './chrono-list';
 import { EntryDialogData } from './entry-dialog-data';
 import { EntryDialogModel } from './entry-dialog-model';
@@ -62,6 +63,32 @@ export class EntriesPage {
           }
 
           return this.listService.createEntry(this.selectedList, model.entryTitle, model.entryDate).pipe();
+        })
+      )
+      .subscribe();
+  }
+
+  updateEntryDialog(item: ChronoEntry): void {
+    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData>(EntryDialogComponent, {
+      data: {
+        model: {
+          entryTitle: item.entryTitle,
+          entryDate: item.entryDate,
+        },
+        viewMode: 'update',
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        flatMap((model: EntryDialogModel) => {
+          if (!model) {
+            return of(null);
+          }
+          item.entryTitle = model.entryTitle;
+          item.entryDate = model.entryDate;
+          return this.listService.save();
         })
       )
       .subscribe();
