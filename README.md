@@ -1,27 +1,41 @@
 # Chrono
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 10.0.0
+This project aims people to make their own lists like the "Articles I've read" or "Movies I've watched".
+- You can see your lists by clicking 'Your lists' on the 'Home' page. (If you have any)
+<br><space><space>* List name - Description - Total number of entries 
+- You can create lists on the '/lists' page by clicking 'Create a list'.
+- You can see and add entries by clicking the list name on 'lists' page.
+<br><space><space>* Entry name - Date you read/watched... it.
+- You can update the list and entries on the 'list/id' page.
 
-## Development server
+A local storage file called '@forCrowd/chrono/data' would be created as a temporary database when you first created a list.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+## Stack
 
-## Code scaffolding
+- Latest node version: 12.18.1
+- Latest npm version: 6.14.5
+- Angular CLI: 10.0.0 (with Angular Material)
+- Typescript: 3.9.5
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Setup
 
-## Build
+- Download or clone the project: `https://github.com/apheliana/chrono.git`
+- Install npm dependencies: `npm i`
+- Run the application: `npm start`
+- Open the application in your browser: http://localhost:4200
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+## Test & Build
 
-## Running unit tests
+You can use the following commands to test and build the application:
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+- `npm test`
+- `ng build --prod`
 
 ## Further help
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+If you have any question about the project, please feel free to contact the contributers;
+- Serkan on [Twitter](https://twitter.com/coni2k) or [LinkedIn](https://www.linkedin.com/in/serkanholat/)
+- Fatih on [LinkedIn](https://www.linkedin.com/in/fatih-soylemez/)
+
+
+
