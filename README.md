@@ -1,14 +1,13 @@
 # Chrono
 
-This project aims people to make their own lists like the "Articles I've read" or "Movies I've watched".
-- You can see your lists by clicking 'Your lists' on the 'Home' page. (If you have any)
-<br><space><space>* List name - Description - Total number of entries 
-- You can create lists on the '/lists' page by clicking 'Create a list'.
-- You can see and add entries by clicking the list name on 'lists' page.
-<br><space><space>* Entry name - Date you read/watched... it.
-- You can update the list and entries on the 'list/id' page.
+This project aims people to make their own lists like the "Articles I've read" or "Movies I've watched"
 
-A local storage file called '@forCrowd/chrono/data' would be created as a temporary database when you first created a list.
+- You can create yours lists on the '/lists' page by clicking 'Create a list'
+- You can see your lists by clicking 'Your lists' on the 'Home' page
+  - List name - Description - Total number of entries
+- You can see and add entries by clicking the list name on 'lists' page
+  - Entry name - Date you read/watched... it.
+- You can update the list and entries on the 'list/id' page
 
 ## Stack
 
@@ -36,6 +35,5 @@ You can use the following commands to test and build the application:
 If you have any question about the project, please feel free to contact the contributers;
 - Serkan on [Twitter](https://twitter.com/coni2k) or [LinkedIn](https://www.linkedin.com/in/serkanholat/)
 - Fatih on [LinkedIn](https://www.linkedin.com/in/fatih-soylemez/)
-
 
 
