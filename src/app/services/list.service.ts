@@ -59,7 +59,7 @@ export class ListService {
         list.modifiedOn = parseISO(dataList.modifiedOn);
         list.deletedOn = parseISO(dataList.deletedOn);
         list.listItems = dataList.listItems.map((dataEntry) => {
-          const entry = new ChronoEntry(dataEntry._entryTitle, dataEntry._entryDate);
+          const entry = new ChronoEntry(dataEntry._entryTitle, parseISO(dataEntry._entryDate));
           entry.id = dataEntry.id;
           entry.listId = dataEntry.listId;
           entry.createdOn = parseISO(dataEntry.createdOn);
