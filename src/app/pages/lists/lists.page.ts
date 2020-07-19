@@ -3,11 +3,11 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
-import { ChronoList } from './chrono-list';
-import { ListDialogData } from './list-dialog-data';
-import { ListDialogModel } from './list-dialog-model';
-import { ListDialogComponent } from './list-dialog.component';
-import { ListService } from './list.service';
+import { ChronoList } from '../../components/list/chrono-list';
+import { ListDialogData } from '../../components/list/dialog/list-dialog-data';
+import { ListDialogModel } from '../../components/list/dialog/list-dialog-model';
+import { ListDialogComponent } from '../../components/list/dialog/list-dialog.component';
+import { ListService } from '../../services/list.service';
 
 @Component({
   templateUrl: './lists.page.html',

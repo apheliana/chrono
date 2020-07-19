@@ -11,10 +11,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EntriesPage } from './entries.page';
-import { EntryDialogComponent } from './entry-dialog.component';
-import { ListDialogComponent } from './list-dialog.component';
-import { ListsPage } from './lists.page';
+import { EntriesPage } from './pages/entries/entries.page';
+import { EntryDialogComponent } from './components/entry/dialog/entry-dialog.component';
+import { ListDialogComponent } from './components/list/dialog/list-dialog.component';
+import { ListsPage } from './pages/lists/lists.page';
 
 @NgModule({
   declarations: [AppComponent, EntriesPage, EntryDialogComponent, ListsPage, ListDialogComponent],

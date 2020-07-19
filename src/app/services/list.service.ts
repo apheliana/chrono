@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { parseISO } from 'date-fns';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ChronoEntry } from './chrono-entry';
-import { ChronoList } from './chrono-list';
-import { ChronoListDto } from './chrono-list-dto';
+import { ChronoEntry } from '../components/entry/chrono-entry';
+import { ChronoList } from '../components/list/chrono-list';
+import { ChronoListDto } from '../components/list/chrono-list-dto';
 
 @Injectable({
   providedIn: 'root',

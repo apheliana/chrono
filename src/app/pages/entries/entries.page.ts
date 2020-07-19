@@ -3,15 +3,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-import { ChronoEntry } from './chrono-entry';
-import { ChronoList } from './chrono-list';
-import { EntryDialogData } from './entry-dialog-data';
-import { EntryDialogModel } from './entry-dialog-model';
-import { EntryDialogComponent } from './entry-dialog.component';
-import { ListDialogData } from './list-dialog-data';
-import { ListDialogModel } from './list-dialog-model';
-import { ListDialogComponent } from './list-dialog.component';
-import { ListService } from './list.service';
+import { ChronoEntry } from '../../components/entry/chrono-entry';
+import { ChronoList } from '../../components/list/chrono-list';
+import { EntryDialogData } from '../../components/entry/dialog/entry-dialog-data';
+import { EntryDialogModel } from '../../components/entry/dialog/entry-dialog-model';
+import { EntryDialogComponent } from '../../components/entry/dialog/entry-dialog.component';
+import { ListDialogData } from '../../components/list/dialog/list-dialog-data';
+import { ListDialogModel } from '../../components/list/dialog/list-dialog-model';
+import { ListDialogComponent } from '../../components/list/dialog/list-dialog.component';
+import { ListService } from '../../services/list.service';
 
 @Component({
   templateUrl: './entries.page.html',

@@ -1,4 +1,4 @@
-import { ChronoEntry } from './chrono-entry';
+import { ChronoEntry } from '../entry/chrono-entry';
 
 export class ChronoList {
   createdOn = new Date();
