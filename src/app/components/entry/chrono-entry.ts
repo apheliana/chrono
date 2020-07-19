@@ -3,7 +3,6 @@ import { format } from 'date-fns';
 export class ChronoEntry {
   id = 0;
   listId = 0;
-  entryDate = new Date();
   createdOn = new Date();
   modifiedOn = new Date();
   deletedOn: Date = null;
@@ -22,13 +21,25 @@ export class ChronoEntry {
     this._entryTitle = value;
   }
 
+  get entryDate(): Date {
+    return this._entryDate;
+  }
+  set entryDate(value: Date) {
+    if (value === null) {
+      throw new Error('Invalid argument');
+    }
+
+    this._entryDate = value;
+  }
   get entryDateText(): string {
     return format(this.entryDate, 'dd.MM.yyyy');
   }
 
   private _entryTitle = '';
+  private _entryDate: Date;
 
-  constructor(entryTitle: string) {
+  constructor(entryTitle: string, entryDate: Date) {
     this.entryTitle = entryTitle;
+    this.entryDate = entryDate;
   }
 }

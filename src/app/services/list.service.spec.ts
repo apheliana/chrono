@@ -71,7 +71,43 @@ describe('ListService', () => {
   });
 
   describe('createEntry tests', () => {
-    // TODO
+    // entry title parameter
+    it('should create an entry with a valid name', () => {
+      service.createList('name', ' desc ');
+      const list = service.lists[0];
+      const entryDate = new Date();
+      service.createEntry(list, 'entry name', entryDate);
+
+      expect(list.listItems[0].entryTitle).toEqual('entry name');
+    });
+
+    it('should fail if entry title is empty string, empty space or null', () => {
+      service.createList('name', ' desc ');
+      const list = service.lists[0];
+      const entryDate = new Date();
+
+      expect(() => service.createEntry(list, '', entryDate)).toThrowError('Invalid argument');
+      expect(() => service.createEntry(list, ' ', entryDate)).toThrowError('Invalid argument');
+      expect(() => service.createEntry(list, null, entryDate)).toThrowError('Invalid argument');
+      expect(list.listItems.length).toEqual(0);
+    });
+
+    it('should trim entry title', () => {
+      service.createList('name', ' desc ');
+      const list = service.lists[0];
+      const entryDate = new Date();
+
+      service.createEntry(list, ' entry name ', entryDate);
+      expect(list.listItems[0].entryTitle).toEqual('entry name');
+    });
+
+    // entry date parameter
+    it('should fail if entry date is null', () => {
+      service.createList('name', ' desc ');
+      const list = service.lists[0];
+
+      expect(() => service.createEntry(list, 'entry title', null)).toThrowError('Invalid argument');
+    });
   });
 
   describe('getListById tests', () => {
