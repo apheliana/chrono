@@ -111,6 +111,10 @@ describe('ListService', () => {
   });
 
   describe('getListById tests', () => {
-    // TODO
+    it('should return the right list', () => {
+      service.createList('name', 'desc');
+      const list = service.lists[0];
+      expect(service.getListById(0)).toEqual(list);
+    });
   });
 });
