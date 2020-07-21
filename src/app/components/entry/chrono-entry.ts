@@ -28,7 +28,9 @@ export class ChronoEntry {
     if (value === null) {
       throw new Error('Invalid argument');
     }
-
+    if (value > new Date()) {
+      throw new Error('Invalid argument');
+    }
     this._entryDate = value;
   }
   get entryDateText(): string {

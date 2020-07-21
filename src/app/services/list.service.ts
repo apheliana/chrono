@@ -39,8 +39,11 @@ export class ListService {
   }
 
   getListById(listId: number): ChronoList {
-    // TODO listId validation
-    return this.lists.find((list) => list.id === listId);
+    if (this.lists.find((list) => list.id === listId)) {
+      return this.lists.find((list) => list.id === listId);
+    } else {
+      throw new Error('Invalid argument');
+    }
   }
 
   save(): Observable<void> {

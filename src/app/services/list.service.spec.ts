@@ -73,7 +73,7 @@ describe('ListService', () => {
   describe('createEntry tests', () => {
     // entry title parameter
     it('should create an entry with a valid name', () => {
-      service.createList('name', ' desc ');
+      service.createList('name', 'desc');
       const list = service.lists[0];
       const entryDate = new Date();
       service.createEntry(list, 'entry name', entryDate);
@@ -82,7 +82,7 @@ describe('ListService', () => {
     });
 
     it('should fail if entry title is empty string, empty space or null', () => {
-      service.createList('name', ' desc ');
+      service.createList('name', 'desc');
       const list = service.lists[0];
       const entryDate = new Date();
 
@@ -93,7 +93,7 @@ describe('ListService', () => {
     });
 
     it('should trim entry title', () => {
-      service.createList('name', ' desc ');
+      service.createList('name', 'desc');
       const list = service.lists[0];
       const entryDate = new Date();
 
@@ -103,10 +103,20 @@ describe('ListService', () => {
 
     // entry date parameter
     it('should fail if entry date is null', () => {
-      service.createList('name', ' desc ');
+      service.createList('name', 'desc');
       const list = service.lists[0];
 
       expect(() => service.createEntry(list, 'entry title', null)).toThrowError('Invalid argument');
+    });
+
+    it('should fail if entry date is later than today', () => {
+      service.createList('name', 'desc');
+      const list = service.lists[0];
+      const entryTitle = 'entry title';
+      const entryDate = new Date();
+      entryDate.setDate(entryDate.getDate() + 1);
+
+      expect(() => service.createEntry(list, entryTitle, entryDate)).toThrowError('Invalid argument');
     });
   });
 
@@ -115,6 +125,12 @@ describe('ListService', () => {
       service.createList('name', 'desc');
       const list = service.lists[0];
       expect(service.getListById(0)).toEqual(list);
+    });
+
+    it('should fail if list-id can not be found', () => {
+      service.createList('name', 'desc');
+      const list = service.lists[0];
+      expect(() => service.getListById(1)).toThrowError('Invalid argument');
     });
   });
 });
