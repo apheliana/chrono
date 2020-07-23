@@ -1,3 +1,4 @@
+import { ChronoList } from '../components/list/chrono-list';
 import { ListService } from './list.service';
 
 describe('ListService', () => {
@@ -5,7 +6,6 @@ describe('ListService', () => {
 
   beforeEach(() => {
     service = new ListService();
-    service.lists = [];
   });
 
   // Sanity
@@ -14,67 +14,40 @@ describe('ListService', () => {
     expect(service.lists.length).toEqual(0);
   });
 
-  describe('createList tests', () => {
-    // name parameter
-    it('should create a list with a valid name', () => {
-      service.createList('list name');
-
+  it('should create a list with valid arguments', () => {
+    service.createList('name').subscribe((list) => {
       expect(service.lists.length).toEqual(1);
-
-      const list = service.lists[0];
-      expect(list.name).toEqual('list name');
-    });
-
-    it('should fail if name is empty string, empty space or null', () => {
-      expect(() => service.createList('')).toThrowError('Invalid argument');
-      expect(() => service.createList(' ')).toThrowError('Invalid argument');
-      expect(() => service.createList(null)).toThrowError('Invalid argument');
-      expect(service.lists.length).toEqual(0);
-    });
-
-    it('should trim name', () => {
-      service.createList(' name ');
-
-      const list = service.lists[0];
+      expect(service.lists[0]).toBe(list);
+      expect(list.id).toEqual(0);
       expect(list.name).toEqual('name');
-    });
-
-    // description parameter
-    it('should create a list even if description is null', () => {
-      service.createList('name');
-
-      expect(service.lists.length).toEqual(1);
-      const list = service.lists[0];
       expect(list.description).toEqual(null);
-    });
-
-    it('should make description null if it is empty string', () => {
-      service.createList('name', '');
-
-      const list = service.lists[0];
-      expect(list.description).toEqual(null);
-    });
-
-    it('should make description null if it is empty space', () => {
-      service.createList('name', ' ');
-
-      const list = service.lists[0];
-      expect(list.description).toEqual(null);
-    });
-
-    it('should trim description', () => {
-      service.createList('name', ' desc ');
-
-      const list = service.lists[0];
-      expect(list.description).toEqual('desc');
     });
   });
 
-  describe('createEntry tests', () => {
-    // TODO
+  it('should create an entry with valid arguments', () => {
+    const list = new ChronoList(0, 'name', 'description');
+    const entryDate = new Date();
+    service.createEntry(list, 'entryTitle', entryDate).subscribe((entry) => {
+      expect(list.listItems.length).toEqual(1);
+      expect(list.listItems[0]).toBe(entry);
+      expect(entry.id).toEqual(0);
+      expect(entry.listId).toEqual(0);
+      expect(entry.entryTitle).toEqual('entryTitle');
+      expect(entry.entryDate).toEqual(entryDate);
+    });
   });
 
   describe('getListById tests', () => {
-    // TODO
+    it('should return the right list', () => {
+      service.createList('name', 'desc').subscribe((list) => {
+        expect(service.getListById(0)).toEqual(list);
+      });
+    });
+
+    it('should fail if list-id can not be found', () => {
+      service.createList('name', 'desc').subscribe(() => {
+        expect(() => service.getListById(1)).toThrowError(`No list found by listId: 1`);
+      });
+    });
   });
 });

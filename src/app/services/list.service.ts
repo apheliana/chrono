@@ -10,17 +10,12 @@ import { ChronoListDto } from '../components/list/chrono-list-dto';
   providedIn: 'root',
 })
 export class ListService {
-  lists: ChronoList[] = [];
-  private readonly localStorageKey = '@forCrowd/chrono/data';
+  readonly lists: ChronoList[] = [];
+  private readonly localStorageKey = '@forCrowd/chrono/data@v1';
 
-  constructor() {
-    this.init();
-  }
-
-  createEntry(selectedList: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
-    const newEntry = new ChronoEntry(entryTitle);
-    newEntry.entryDate = entryDate;
-    selectedList.listItems.push(newEntry);
+  createEntry(list: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
+    const newEntry = new ChronoEntry(0, list.id, entryTitle, entryDate);
+    list.listItems.push(newEntry);
 
     // TODO We may have to sort the items when there's a new entry
 
@@ -28,6 +23,7 @@ export class ListService {
   }
 
   createList(name: string, description: string = null): Observable<ChronoList> {
+    // TODO Temporarily solution until we have a proper back-end
     let listId = 0;
     if (this.lists.length > 0) {
       listId = this.lists[this.lists.length - 1].id + 1;
@@ -39,9 +35,19 @@ export class ListService {
     return this.save().pipe(map(() => list));
   }
 
+  getLists(): Observable<ChronoList[]> {
+    this.init(); // TODO This should load from the API
+    return of(this.lists);
+  }
+
   getListById(listId: number): ChronoList {
-    // TODO listId validation
-    return this.lists.find((list) => list.id === listId);
+    const foundList = this.lists.find((list) => list.id === listId);
+
+    if (!foundList) {
+      throw new Error(`No list found by listId: ${listId}`);
+    }
+
+    return foundList;
   }
 
   save(): Observable<void> {
@@ -54,22 +60,25 @@ export class ListService {
     const appDataLists = JSON.parse(appDataJSON) as ChronoListDto[];
 
     if (appDataLists !== null) {
-      this.lists = appDataLists.map((dataList) => {
-        const list = new ChronoList(dataList.id, dataList._name, dataList._description);
+      appDataLists.forEach((dataList) => {
+        const list = new ChronoList(dataList._id, dataList._name, dataList._description);
         list.createdOn = parseISO(dataList.createdOn);
         list.modifiedOn = parseISO(dataList.modifiedOn);
         list.deletedOn = parseISO(dataList.deletedOn);
         list.listItems = dataList.listItems.map((dataEntry) => {
-          const entry = new ChronoEntry(dataEntry._entryTitle);
-          entry.id = dataEntry.id;
-          entry.listId = dataEntry.listId;
-          entry.entryDate = parseISO(dataEntry.entryDate);
+          const entry = new ChronoEntry(
+            dataEntry._id,
+            dataEntry._listId,
+            dataEntry._entryTitle,
+            parseISO(dataEntry._entryDate)
+          );
           entry.createdOn = parseISO(dataEntry.createdOn);
           entry.modifiedOn = parseISO(dataEntry.modifiedOn);
           entry.deletedOn = parseISO(dataEntry.deletedOn);
           return entry;
         });
-        return list;
+
+        this.lists.push(list);
       });
     }
   }

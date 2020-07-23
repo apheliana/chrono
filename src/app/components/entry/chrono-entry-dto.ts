@@ -1,8 +1,8 @@
 export class ChronoEntryDto {
-  id: number;
-  listId: number;
+  _id: number;
+  _listId: number;
   _entryTitle: string;
-  entryDate: string;
+  _entryDate: string;
   createdOn: string;
   modifiedOn: string;
   deletedOn?: string;
