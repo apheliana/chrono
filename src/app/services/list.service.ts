@@ -25,10 +25,11 @@ export class ListService {
   createList(name: string, description: string = null): Observable<ChronoList> {
     // TODO Temporarily solution until we have a proper back-end
     let listId = 0;
+    const userId = 0;
     if (this.lists.length > 0) {
       listId = this.lists[this.lists.length - 1].id + 1;
     }
-    const list = new ChronoList(listId, name, description);
+    const list = new ChronoList(listId, userId, name, description);
 
     this.lists.push(list);
 
@@ -61,7 +62,7 @@ export class ListService {
 
     if (appDataLists !== null) {
       appDataLists.forEach((dataList) => {
-        const list = new ChronoList(dataList._id, dataList._name, dataList._description);
+        const list = new ChronoList(dataList._id, dataList._userId, dataList._name, dataList._description);
         list.createdOn = parseISO(dataList.createdOn);
         list.modifiedOn = parseISO(dataList.modifiedOn);
         list.deletedOn = parseISO(dataList.deletedOn);

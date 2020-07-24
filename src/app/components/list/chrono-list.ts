@@ -29,6 +29,17 @@ export class ChronoList {
     this._id = value;
   }
 
+  get userId(): number {
+    return this._userId;
+  }
+  set userId(value) {
+    if (typeof value === 'undefined' || value === null) {
+      throw new Error('Invalid argument');
+    }
+
+    this._userId = value;
+  }
+
   get name(): string {
     return this._name;
   }
@@ -44,8 +55,10 @@ export class ChronoList {
   private _description = '';
   private _id = 0;
   private _name = '';
+  private _userId = 0;
 
-  constructor(id: number, name: string, description: string = null) {
+  constructor(id: number, userId: number, name: string, description: string = null) {
+    this.userId = userId;
     this.id = id;
     this.name = name;
     this.description = description;

@@ -14,6 +14,8 @@ import { ListService } from '../../services/list.service';
   styleUrls: ['./lists.page.scss'],
 })
 export class ListsPage {
+  userName = 'apheliana'; // TODO get username from URL
+
   get lists(): ChronoList[] {
     return this.listService.lists;
   }
