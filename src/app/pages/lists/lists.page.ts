@@ -16,7 +16,7 @@ import { ListService } from '../../services/list.service';
 export class ListsPage {
   userName: string;
   get lists(): ChronoList[] {
-    return this.listService.lists;
+    return this.listService.users[0].userLists; // TODO Retrieve current users' lists
   }
 
   constructor(
@@ -48,7 +48,8 @@ export class ListsPage {
             return of(null);
           }
 
-          return this.listService.createList(model.name, model.description).pipe(
+          // TODO Current user's ID
+          return this.listService.createList(0, model.name, model.description).pipe(
             tap((list) => {
               this.router.navigate([this.userName, 'list', list.id]);
             })

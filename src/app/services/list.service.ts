@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
-import { parseISO } from 'date-fns';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChronoEntry } from '../components/entry/chrono-entry';
 import { ChronoList } from '../components/list/chrono-list';
 import { ChronoListDto } from '../components/list/chrono-list-dto';
+import { ChronoUser } from '../components/user/chrono-user';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
-  readonly lists: ChronoList[] = [];
-  private readonly localStorageKey = '@forCrowd/chrono/data@v1';
+  readonly users: ChronoUser[] = [];
+  // readonly lists: ChronoList[] = [];
+  private readonly localStorageKey = '@forCrowd/chrono/data@v1.1';
 
   createEntry(list: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
     const newEntry = new ChronoEntry(0, list.id, entryTitle, entryDate);
@@ -22,27 +23,37 @@ export class ListService {
     return this.save().pipe(map(() => newEntry));
   }
 
-  createList(name: string, description: string = null): Observable<ChronoList> {
-    // TODO Temporarily solution until we have a proper back-end
-    let listId = 0;
-    const userId = 0;
-    if (this.lists.length > 0) {
-      listId = this.lists[this.lists.length - 1].id + 1;
+  createList(userId: number, name: string, description: string = null): Observable<ChronoList> {
+    const foundUser = this.users.find((user) => user.id === userId);
+
+    if (foundUser === null) {
+      // TODO Not found
     }
+
+    // TODO Temporarily solution until we have a proper back-end
+
+    const listId = foundUser.userLists.length > 0 ? foundUser.userLists[foundUser.userLists.length - 1].id + 1 : 0;
+
     const list = new ChronoList(listId, userId, name, description);
 
-    this.lists.push(list);
+    foundUser.userLists.push(list);
 
     return this.save().pipe(map(() => list));
   }
 
-  getLists(): Observable<ChronoList[]> {
+  getUsers(): Observable<ChronoUser[]> {
     this.init(); // TODO This should load from the API
-    return of(this.lists);
+    return of(this.users);
   }
 
-  getListById(listId: number): ChronoList {
-    const foundList = this.lists.find((list) => list.id === listId);
+  getListById(userId: number, listId: number): ChronoList {
+    const foundUser = this.users.find((user) => user.id === userId);
+
+    if (foundUser === null) {
+      // TODO Not found
+    }
+
+    const foundList = foundUser.userLists.find((list) => list.id === listId);
 
     if (!foundList) {
       throw new Error(`No list found by listId: ${listId}`);
@@ -52,7 +63,7 @@ export class ListService {
   }
 
   save(): Observable<void> {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.lists));
+    localStorage.setItem(this.localStorageKey, JSON.stringify(this.users));
     return of(null);
   }
 
@@ -60,27 +71,32 @@ export class ListService {
     const appDataJSON = localStorage.getItem(this.localStorageKey);
     const appDataLists = JSON.parse(appDataJSON) as ChronoListDto[];
 
-    if (appDataLists !== null) {
-      appDataLists.forEach((dataList) => {
-        const list = new ChronoList(dataList._id, dataList._userId, dataList._name, dataList._description);
-        list.createdOn = parseISO(dataList.createdOn);
-        list.modifiedOn = parseISO(dataList.modifiedOn);
-        list.deletedOn = parseISO(dataList.deletedOn);
-        list.listItems = dataList.listItems.map((dataEntry) => {
-          const entry = new ChronoEntry(
-            dataEntry._id,
-            dataEntry._listId,
-            dataEntry._entryTitle,
-            parseISO(dataEntry._entryDate)
-          );
-          entry.createdOn = parseISO(dataEntry.createdOn);
-          entry.modifiedOn = parseISO(dataEntry.modifiedOn);
-          entry.deletedOn = parseISO(dataEntry.deletedOn);
-          return entry;
-        });
+    if (appDataLists === null) {
+      const apheliana = new ChronoUser(0, 'apheliana', 'fatih@gmail.com', 'pass');
+      const coni2k = new ChronoUser(1, 'coni2k', 'serkanholat@hotmail.com', 'word');
 
-        this.lists.push(list);
-      });
+      this.users.push(apheliana);
+      this.users.push(coni2k);
+    } else {
+      // appDataLists.forEach((dataList) => {
+      //   const list = new ChronoList(dataList._id, dataList._userId, dataList._name, dataList._description);
+      //   list.createdOn = parseISO(dataList.createdOn);
+      //   list.modifiedOn = parseISO(dataList.modifiedOn);
+      //   list.deletedOn = parseISO(dataList.deletedOn);
+      //   list.listItems = dataList.listItems.map((dataEntry) => {
+      //     const entry = new ChronoEntry(
+      //       dataEntry._id,
+      //       dataEntry._listId,
+      //       dataEntry._entryTitle,
+      //       parseISO(dataEntry._entryDate)
+      //     );
+      //     entry.createdOn = parseISO(dataEntry.createdOn);
+      //     entry.modifiedOn = parseISO(dataEntry.modifiedOn);
+      //     entry.deletedOn = parseISO(dataEntry.deletedOn);
+      //     return entry;
+      //   });
+      //   this.lists.push(list);
+      // });
     }
   }
 }

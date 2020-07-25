@@ -33,7 +33,7 @@ export class EntriesPage {
     }
 
     const listId = Number(listIdParam);
-    const list = this.listService.getListById(listId);
+    const list = this.listService.getListById(0, listId); // TODO Retrieve the current user
 
     if (!list) {
       this.router.navigate(['lists']);

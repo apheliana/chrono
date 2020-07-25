@@ -12,6 +12,6 @@ export class AppComponent {
   // We may move it to the appInitializer later on
   userName = 'apheliana'; // TODO get username from URL
   constructor(private listService: ListService) {
-    this.listService.getLists().subscribe();
+    this.listService.getUsers().subscribe();
   }
 }
