@@ -3,6 +3,7 @@
     "angular.ng-template",
     "esbenp.prettier-vscode",
     "ms-vscode.vscode-typescript-tslint-plugin",
+    "ms-vsliveshare.vsliveshare",
     "streetsidesoftware.code-spell-checker",
     "tyriar.sort-lines"
   ]
