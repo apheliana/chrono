@@ -50,7 +50,7 @@ export class ListsPage {
 
           return this.listService.createList(model.name, model.description).pipe(
             tap((list) => {
-              this.router.navigate(['list', list.id]);
+              this.router.navigate([this.userName, 'list', list.id]);
             })
           );
         })

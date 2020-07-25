@@ -25,7 +25,7 @@ describe('ListService', () => {
   });
 
   it('should create an entry with valid arguments', () => {
-    const list = new ChronoList(0, 'name', 'description');
+    const list = new ChronoList(0, 0, 'name', 'description');
     const entryDate = new Date();
     service.createEntry(list, 'entryTitle', entryDate).subscribe((entry) => {
       expect(list.listItems.length).toEqual(1);
