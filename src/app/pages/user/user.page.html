@@ -5,5 +5,5 @@
   <input matInput placeholder="User Name?" [(ngModel)]="userName" />
 </mat-form-field>
 <div>
-  <button mat-raised-button color="primary" (click)="showUsersPage()">Check Console</button>
+  <a routerLink="/{{ userName }}/lists">{{ userName}}'s Lists</a>
 </div>

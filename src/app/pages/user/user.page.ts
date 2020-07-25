@@ -8,7 +8,7 @@ import { ChronoUser } from '../../components/user/chrono-user';
   styleUrls: ['./user.page.scss'],
 })
 export class UserPage {
-  userName: string;
+  userName = 'apheliana';
   userMail = 'mail.mail.com';
   userPassword = 'pass';
   entryDate = new Date();

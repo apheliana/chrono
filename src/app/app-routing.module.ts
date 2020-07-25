@@ -5,8 +5,8 @@ import { ListsPage } from './pages/lists/lists.page';
 import { UserPage } from './pages/user/user.page';
 
 const routes: Routes = [
-  { path: 'list/:list-id', component: EntriesPage },
-  { path: 'lists', component: ListsPage },
+  { path: ':user-name/list/:list-id', component: EntriesPage },
+  { path: ':user-name/lists', component: ListsPage },
   { path: '', component: UserPage },
 ];
 

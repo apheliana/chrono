@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { ChronoList } from '../../components/list/chrono-list';
@@ -14,13 +14,20 @@ import { ListService } from '../../services/list.service';
   styleUrls: ['./lists.page.scss'],
 })
 export class ListsPage {
-  userName = 'apheliana'; // TODO get username from URL
-
+  userName: string;
   get lists(): ChronoList[] {
     return this.listService.lists;
   }
 
-  constructor(private dialog: MatDialog, private listService: ListService, private router: Router) {}
+  constructor(
+    private activatedRoute: ActivatedRoute,
+    private dialog: MatDialog,
+    private listService: ListService,
+    private router: Router
+  ) {
+    this.userName = this.activatedRoute.snapshot.params['user-name'];
+    console.log('userNAme:', this.userName);
+  }
 
   createListDialog(): void {
     const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData>(ListDialogComponent, {
