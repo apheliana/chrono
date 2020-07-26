@@ -3,7 +3,7 @@
   <button mat-raised-button color="primary" (click)="createListDialog()">Create a list</button>
   <ul>
     <li *ngFor="let list of lists">
-      <a routerLink="/{{userName}}/list/{{ list.id }}">{{ list.name }}</a> - {{ list.description }} - {{
+      <a routerLink="/{{ userName }}/list/{{ list.id }}">{{ list.name }}</a> - {{ list.description }} - {{
       list.listItems.length }} Entries
     </li>
   </ul>

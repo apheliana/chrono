@@ -4,13 +4,11 @@ export class ChronoUser {
   id = 0;
   userName = '';
   emailAddress = '';
-  password = '';
-  userLists: ChronoList[] = [];
+  readonly userLists: ChronoList[] = [];
 
-  constructor(id: number, userName: string, userMail: string, userPassword: string) {
+  constructor(id: number, userName: string, emailAddress: string) {
     this.id = id;
     this.userName = userName;
-    this.emailAddress = userMail;
-    this.password = userPassword;
+    this.emailAddress = emailAddress;
   }
 }

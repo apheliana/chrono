@@ -1,9 +1,10 @@
-<h3>Login</h3>
-<br />
+<h3>Create User</h3>
 <mat-form-field>
   <mat-label>What's your user name?</mat-label>
   <input matInput placeholder="User Name?" [(ngModel)]="userName" />
 </mat-form-field>
 <div>
-  <a routerLink="/{{ userName }}/lists">{{ userName}}'s Lists</a>
+  <button mat-button type="submit" color="primary" (click)="createUser()">
+    Create
+  </button>
 </div>

@@ -15,10 +15,10 @@ import { EntryDialogComponent } from './components/entry/dialog/entry-dialog.com
 import { ListDialogComponent } from './components/list/dialog/list-dialog.component';
 import { EntriesPage } from './pages/entries/entries.page';
 import { ListsPage } from './pages/lists/lists.page';
-import { UserPage } from './pages/user/user.page';
+import { CreateUserPage } from './pages/user/create-user.page';
 
 @NgModule({
-  declarations: [AppComponent, EntriesPage, EntryDialogComponent, ListsPage, ListDialogComponent, UserPage],
+  declarations: [AppComponent, EntriesPage, EntryDialogComponent, ListsPage, ListDialogComponent, CreateUserPage],
   imports: [
     BrowserModule,
     AppRoutingModule,

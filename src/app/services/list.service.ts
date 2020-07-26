@@ -11,11 +11,10 @@ import { ChronoUser } from '../components/user/chrono-user';
 })
 export class ListService {
   readonly users: ChronoUser[] = [];
-  // readonly lists: ChronoList[] = [];
-  private readonly localStorageKey = '@forCrowd/chrono/data@v1.1';
+  private readonly localStorageKey = '@forCrowd/chrono/data@v1.2';
 
   createEntry(list: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
-    const newEntry = new ChronoEntry(0, list.id, entryTitle, entryDate);
+    const newEntry = new ChronoEntry(new Date().getTime(), list.id, entryTitle, entryDate);
     list.listItems.push(newEntry);
 
     // TODO We may have to sort the items when there's a new entry
@@ -31,10 +30,7 @@ export class ListService {
     }
 
     // TODO Temporarily solution until we have a proper back-end
-
-    const listId = foundUser.userLists.length > 0 ? foundUser.userLists[foundUser.userLists.length - 1].id + 1 : 0;
-
-    const list = new ChronoList(listId, userId, name, description);
+    const list = new ChronoList(new Date().getTime(), userId, name, description);
 
     foundUser.userLists.push(list);
 
@@ -72,8 +68,8 @@ export class ListService {
     const appDataLists = JSON.parse(appDataJSON) as ChronoListDto[];
 
     if (appDataLists === null) {
-      const apheliana = new ChronoUser(0, 'apheliana', 'fatih@gmail.com', 'pass');
-      const coni2k = new ChronoUser(1, 'coni2k', 'serkanholat@hotmail.com', 'word');
+      const apheliana = new ChronoUser(new Date().getTime(), 'apheliana', 'fatih@gmail.com');
+      const coni2k = new ChronoUser(new Date().getTime(), 'coni2k', 'serkanholat@hotmail.com');
 
       this.users.push(apheliana);
       this.users.push(coni2k);

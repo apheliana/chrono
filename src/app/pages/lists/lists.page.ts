@@ -14,7 +14,8 @@ import { ListService } from '../../services/list.service';
   styleUrls: ['./lists.page.scss'],
 })
 export class ListsPage {
-  userName: string;
+  userName = '';
+
   get lists(): ChronoList[] {
     return this.listService.users[0].userLists; // TODO Retrieve current users' lists
   }
