@@ -69,7 +69,7 @@ export class ListService {
 
     if (appDataLists === null) {
       const apheliana = new ChronoUser(new Date().getTime(), 'apheliana', 'fatih@gmail.com');
-      const coni2k = new ChronoUser(new Date().getTime(), 'coni2k', 'serkanholat@hotmail.com');
+      const coni2k = new ChronoUser(new Date().getTime() + 1, 'coni2k', 'serkanholat@hotmail.com');
 
       this.users.push(apheliana);
       this.users.push(coni2k);

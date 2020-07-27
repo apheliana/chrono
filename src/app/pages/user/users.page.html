@@ -1,0 +1,9 @@
+<h3>Users</h3>
+<ul>
+  <li *ngFor="let user of users">
+    <a routerLink="/{{ user.userName }}">{{ user.userName }}</a> - ID: {{ user.id }} - e-mail: {{ user.emailAddress }} -
+    {{ user.userLists.length }} Lists
+  </li>
+</ul>
+<br />
+<a routerLink="/create-user">Create a new user</a>

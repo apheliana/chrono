@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { ChronoUser } from 'src/app/components/user/chrono-user';
 
 @Component({
@@ -6,12 +7,13 @@ import { ChronoUser } from 'src/app/components/user/chrono-user';
   templateUrl: './create-user.page.html',
 })
 export class CreateUserPage {
-  emailAddress = 'apheliana@forcrowd.org';
+  emailAddress = '';
   userName = '';
+  constructor(private router: Router) {}
 
   createUser(): void {
     const chronoUser = new ChronoUser(new Date().getTime(), this.userName, this.emailAddress);
     console.log('chrono user:', chronoUser);
-    // TODO Save and navigate to user's page (/apheliana)
+    this.router.navigate([this.userName]);
   }
 }

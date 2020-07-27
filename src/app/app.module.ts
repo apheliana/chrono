@@ -16,9 +16,18 @@ import { ListDialogComponent } from './components/list/dialog/list-dialog.compon
 import { EntriesPage } from './pages/entries/entries.page';
 import { ListsPage } from './pages/lists/lists.page';
 import { CreateUserPage } from './pages/user/create-user.page';
+import { UsersPage } from './pages/user/users.page';
 
 @NgModule({
-  declarations: [AppComponent, EntriesPage, EntryDialogComponent, ListsPage, ListDialogComponent, CreateUserPage],
+  declarations: [
+    AppComponent,
+    EntriesPage,
+    EntryDialogComponent,
+    ListsPage,
+    ListDialogComponent,
+    CreateUserPage,
+    UsersPage,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
