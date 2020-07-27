@@ -27,7 +27,6 @@ export class ListsPage {
     private router: Router
   ) {
     this.userName = this.activatedRoute.snapshot.params['user-name'];
-    console.log('userNAme:', this.userName);
   }
 
   createListDialog(): void {

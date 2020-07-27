@@ -7,8 +7,6 @@ import { ListService } from '../../services/list.service';
   styleUrls: ['./users.page.scss'],
 })
 export class UsersPage {
-  userName = '';
-
   get users(): ChronoUser[] {
     return this.listService.users;
   }

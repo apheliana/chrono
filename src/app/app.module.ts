@@ -15,17 +15,19 @@ import { EntryDialogComponent } from './components/entry/dialog/entry-dialog.com
 import { ListDialogComponent } from './components/list/dialog/list-dialog.component';
 import { EntriesPage } from './pages/entries/entries.page';
 import { ListsPage } from './pages/lists/lists.page';
+import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
 import { CreateUserPage } from './pages/user/create-user.page';
 import { UsersPage } from './pages/user/users.page';
 
 @NgModule({
   declarations: [
     AppComponent,
+    CreateUserPage,
     EntriesPage,
     EntryDialogComponent,
-    ListsPage,
     ListDialogComponent,
-    CreateUserPage,
+    ListsPage,
+    PageNotFoundPage,
     UsersPage,
   ],
   imports: [
