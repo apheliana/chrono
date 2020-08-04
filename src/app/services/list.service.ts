@@ -22,13 +22,11 @@ export class ListService {
     return this.save().pipe(map(() => newEntry));
   }
 
-  createList(userName: string, name: string, description: string = null): Observable<ChronoList> {
-    const foundUser = this.getUserByName(userName);
-
+  createList(user: ChronoUser, name: string, description: string = null): Observable<ChronoList> {
     // TODO Temporarily solution until we have a proper back-end
-    const list = new ChronoList(new Date().getTime(), foundUser.id, name, description);
+    const list = new ChronoList(new Date().getTime(), user.id, name, description);
 
-    foundUser.userLists.push(list);
+    user.userLists.push(list);
 
     return this.save().pipe(map(() => list));
   }
@@ -45,6 +43,7 @@ export class ListService {
     }
     return foundUser;
   }
+
   getListByUserName(userName: string, listId: number): ChronoList {
     const foundUser = this.getUserByName(userName);
     const foundList = foundUser.userLists.find((list) => list.id === listId);

@@ -52,7 +52,7 @@ export class ListsPage {
             return of(null);
           }
 
-          return this.listService.createList(this.selectedUser.userName, model.name, model.description).pipe(
+          return this.listService.createList(this.selectedUser, model.name, model.description).pipe(
             tap((list) => {
               this.router.navigate([this.selectedUser.userName, list.id]);
             })
