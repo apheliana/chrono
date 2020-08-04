@@ -11,7 +11,7 @@ import { ChronoUser } from '../components/user/chrono-user';
 })
 export class ListService {
   readonly users: ChronoUser[] = [];
-  private readonly localStorageKey = '@forCrowd/chrono/data@v1.2';
+  private readonly localStorageKey = '@forCrowd/chrono/data@v1.3';
 
   createEntry(list: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
     const newEntry = new ChronoEntry(new Date().getTime(), list.id, entryTitle, entryDate);
@@ -22,15 +22,11 @@ export class ListService {
     return this.save().pipe(map(() => newEntry));
   }
 
-  createList(userId: number, name: string, description: string = null): Observable<ChronoList> {
-    const foundUser = this.users.find((user) => user.id === userId);
-
-    if (foundUser === null) {
-      // TODO Not found
-    }
+  createList(userName: string, name: string, description: string = null): Observable<ChronoList> {
+    const foundUser = this.getUserByName(userName);
 
     // TODO Temporarily solution until we have a proper back-end
-    const list = new ChronoList(new Date().getTime(), userId, name, description);
+    const list = new ChronoList(new Date().getTime(), foundUser.id, name, description);
 
     foundUser.userLists.push(list);
 
@@ -42,13 +38,15 @@ export class ListService {
     return of(this.users);
   }
 
-  getListById(userId: number, listId: number): ChronoList {
-    const foundUser = this.users.find((user) => user.id === userId);
-
+  getUserByName(userName: string): ChronoUser {
+    const foundUser = this.users.find((user) => user.userName === userName);
     if (foundUser === null) {
-      // TODO Not found
+      throw new Error(`No user found called: ${userName}`);
     }
-
+    return foundUser;
+  }
+  getListByUserName(userName: string, listId: number): ChronoList {
+    const foundUser = this.getUserByName(userName);
     const foundList = foundUser.userLists.find((list) => list.id === listId);
 
     if (!foundList) {

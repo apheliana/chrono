@@ -27,16 +27,17 @@ export class EntriesPage {
     private router: Router
   ) {
     const listIdParam = this.activatedRoute.snapshot.params['list-id'];
+    const userName = this.activatedRoute.snapshot.params['user-name'];
     if (!listIdParam) {
-      this.router.navigate(['lists']);
+      this.router.navigate(['/404']);
       return;
     }
 
     const listId = Number(listIdParam);
-    const list = this.listService.getListById(0, listId); // TODO Retrieve the current user
+    const list = this.listService.getListByUserName(userName, listId);
 
     if (!list) {
-      this.router.navigate(['lists']);
+      this.router.navigate(['/404']);
       return;
     }
 

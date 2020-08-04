@@ -16,11 +16,8 @@ import { ListService } from '../../services/list.service';
 })
 export class ListsPage {
   userName = '';
-  user: ChronoUser;
-
-  get lists(): ChronoList[] {
-    return this.listService.users[0].userLists; // TODO Retrieve current users' lists
-  }
+  selectedUser: ChronoUser = null;
+  lists: ChronoList[] = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -29,10 +26,11 @@ export class ListsPage {
     private router: Router
   ) {
     this.userName = this.activatedRoute.snapshot.params['user-name'];
-    this.user = this.listService.users.find((user) => user.userName === this.userName);
-    if (!this.user) {
-      this.router.navigateByUrl('404');
+    this.selectedUser = this.listService.getUserByName(this.userName);
+    if (!this.selectedUser) {
+      this.router.navigate(['/404']);
     }
+    this.lists = this.selectedUser.userLists;
   }
 
   createListDialog(): void {
@@ -54,10 +52,9 @@ export class ListsPage {
             return of(null);
           }
 
-          // TODO Current user's ID
-          return this.listService.createList(0, model.name, model.description).pipe(
+          return this.listService.createList(this.selectedUser.userName, model.name, model.description).pipe(
             tap((list) => {
-              this.router.navigate([this.userName, 'list', list.id]);
+              this.router.navigate([this.selectedUser.userName, list.id]);
             })
           );
         })
