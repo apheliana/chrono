@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
+import { ChronoUser } from 'src/app/components/user/chrono-user';
 import { ChronoList } from '../../components/list/chrono-list';
 import { ListDialogData } from '../../components/list/dialog/list-dialog-data';
 import { ListDialogModel } from '../../components/list/dialog/list-dialog-model';
@@ -15,6 +16,7 @@ import { ListService } from '../../services/list.service';
 })
 export class ListsPage {
   userName = '';
+  user: ChronoUser;
 
   get lists(): ChronoList[] {
     return this.listService.users[0].userLists; // TODO Retrieve current users' lists
@@ -27,6 +29,10 @@ export class ListsPage {
     private router: Router
   ) {
     this.userName = this.activatedRoute.snapshot.params['user-name'];
+    this.user = this.listService.users.find((user) => user.userName === this.userName);
+    if (!this.user) {
+      this.router.navigateByUrl('404');
+    }
   }
 
   createListDialog(): void {

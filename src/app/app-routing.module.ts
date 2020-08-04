@@ -7,14 +7,14 @@ import { CreateUserPage } from './pages/user/create-user.page';
 import { UsersPage } from './pages/user/users.page';
 
 const routes: Routes = [
-  { path: 'create-user', component: CreateUserPage },
-  { path: ':user-name/:list-id', component: EntriesPage },
-  { path: ':user-name', component: ListsPage },
-  { path: '', component: UsersPage },
   {
     path: '404',
     component: PageNotFoundPage,
   },
+  { path: 'create-user', component: CreateUserPage },
+  { path: ':user-name/:list-id', component: EntriesPage },
+  { path: ':user-name', component: ListsPage },
+  { path: '', component: UsersPage },
   {
     path: '**',
     redirectTo: '/404',
