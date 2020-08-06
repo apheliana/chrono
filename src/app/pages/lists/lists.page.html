@@ -1,9 +1,9 @@
-<div *ngIf="lists.length > 0 else noData">
+<div *ngIf="selectedUser.userLists.length > 0 else noData">
   <h3>Your lists</h3>
   <button mat-raised-button color="primary" (click)="createListDialog()">Create a list</button>
   <ul>
-    <li *ngFor="let list of lists">
-      <a routerLink="/{{ userName }}/{{ list.id }}">{{ list.name }}</a> - {{ list.description }} - {{
+    <li *ngFor="let list of selectedUser.userLists">
+      <a routerLink="/{{ selectedUser.userName }}/{{ list.id }}">{{ list.name }}</a> - {{ list.description }} - {{
       list.listItems.length }} Entries
     </li>
   </ul>

@@ -4,20 +4,17 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { ChronoUser } from 'src/app/components/user/chrono-user';
-import { ChronoList } from '../../components/list/chrono-list';
+import { ListService } from '../../services/list.service';
 import { ListDialogData } from './dialog/list-dialog-data';
 import { ListDialogModel } from './dialog/list-dialog-model';
 import { ListDialogComponent } from './dialog/list-dialog.component';
-import { ListService } from '../../services/list.service';
 
 @Component({
   templateUrl: './lists.page.html',
   styleUrls: ['./lists.page.scss'],
 })
 export class ListsPage {
-  userName = '';
   selectedUser: ChronoUser = null;
-  lists: ChronoList[] = null;
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -25,12 +22,19 @@ export class ListsPage {
     private listService: ListService,
     private router: Router
   ) {
-    this.userName = this.activatedRoute.snapshot.params['user-name'];
-    this.selectedUser = this.listService.getUserByName(this.userName);
+    const userName = this.activatedRoute.snapshot.params['user-name'];
+
+    if (!userName) {
+      this.router.navigate(['/404']);
+      return;
+    }
+
+    this.selectedUser = this.listService.getUserByName(userName);
+
     if (!this.selectedUser) {
       this.router.navigate(['/404']);
+      return;
     }
-    this.lists = this.selectedUser.userLists;
   }
 
   createListDialog(): void {
