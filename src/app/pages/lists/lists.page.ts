@@ -5,9 +5,9 @@ import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { ChronoUser } from 'src/app/components/user/chrono-user';
 import { ChronoList } from '../../components/list/chrono-list';
-import { ListDialogData } from '../../components/list/dialog/list-dialog-data';
-import { ListDialogModel } from '../../components/list/dialog/list-dialog-model';
-import { ListDialogComponent } from '../../components/list/dialog/list-dialog.component';
+import { ListDialogData } from './dialog/list-dialog-data';
+import { ListDialogModel } from './dialog/list-dialog-model';
+import { ListDialogComponent } from './dialog/list-dialog.component';
 import { ListService } from '../../services/list.service';
 
 @Component({
