@@ -4,7 +4,7 @@ export class ChronoList {
   createdOn = new Date();
   modifiedOn = new Date();
   deletedOn?: Date = null;
-  readonly listItems: ChronoEntry[] = [];
+  listItems: ChronoEntry[] = [];
 
   get description(): string {
     return this._description;

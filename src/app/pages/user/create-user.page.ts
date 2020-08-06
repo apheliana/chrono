@@ -17,9 +17,7 @@ export class CreateUserPage {
   }
 
   createUser(): void {
-    const chronoUser = new ChronoUser(new Date().getTime(), this.userName, this.emailAddress);
-    this.users.push(chronoUser);
-    console.log('chrono user:', chronoUser);
+    this.listService.createUser(this.userName, this.emailAddress);
     this.router.navigate([this.userName]);
   }
 }

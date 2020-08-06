@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
+import { parseISO } from 'date-fns';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ChronoEntry } from '../components/entry/chrono-entry';
 import { ChronoList } from '../components/list/chrono-list';
-import { ChronoListDto } from '../components/list/chrono-list-dto';
 import { ChronoUser } from '../components/user/chrono-user';
+import { ChronoUserDto } from '../components/user/chrono-user-dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ListService {
   readonly users: ChronoUser[] = [];
-  private readonly localStorageKey = '@forCrowd/chrono/data@v1.3';
+  private readonly localStorageKey = '@forCrowd/chrono/data@v1.4';
 
   createEntry(list: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
     const newEntry = new ChronoEntry(new Date().getTime(), list.id, entryTitle, entryDate);
@@ -29,6 +30,12 @@ export class ListService {
     user.userLists.push(list);
 
     return this.save().pipe(map(() => list));
+  }
+
+  createUser(userName: string, emailAddress: string) {
+    const user = new ChronoUser(new Date().getTime(), userName, emailAddress);
+    this.users.push(user);
+    return this.save().pipe(map(() => user));
   }
 
   getUsers(): Observable<ChronoUser[]> {
@@ -62,34 +69,40 @@ export class ListService {
 
   private init(): void {
     const appDataJSON = localStorage.getItem(this.localStorageKey);
-    const appDataLists = JSON.parse(appDataJSON) as ChronoListDto[];
+    const appDataLists = JSON.parse(appDataJSON) as ChronoUserDto[];
 
     if (appDataLists === null) {
-      const apheliana = new ChronoUser(new Date().getTime(), 'apheliana', 'fatih@gmail.com');
-      const coni2k = new ChronoUser(new Date().getTime() + 1, 'coni2k', 'serkanholat@hotmail.com');
-
-      this.users.push(apheliana);
-      this.users.push(coni2k);
+      // const apheliana = new ChronoUser(new Date().getTime(), 'apheliana', 'fatih@gmail.com');
+      // const coni2k = new ChronoUser(new Date().getTime() + 1, 'coni2k', 'serkanholat@hotmail.com');
+      // this.users.push(apheliana);
+      // this.users.push(coni2k);
     } else {
-      // appDataLists.forEach((dataList) => {
-      //   const list = new ChronoList(dataList._id, dataList._userId, dataList._name, dataList._description);
-      //   list.createdOn = parseISO(dataList.createdOn);
-      //   list.modifiedOn = parseISO(dataList.modifiedOn);
-      //   list.deletedOn = parseISO(dataList.deletedOn);
-      //   list.listItems = dataList.listItems.map((dataEntry) => {
-      //     const entry = new ChronoEntry(
-      //       dataEntry._id,
-      //       dataEntry._listId,
-      //       dataEntry._entryTitle,
-      //       parseISO(dataEntry._entryDate)
-      //     );
-      //     entry.createdOn = parseISO(dataEntry.createdOn);
-      //     entry.modifiedOn = parseISO(dataEntry.modifiedOn);
-      //     entry.deletedOn = parseISO(dataEntry.deletedOn);
-      //     return entry;
-      //   });
-      //   this.lists.push(list);
-      // });
+      appDataLists.forEach((dataUser) => {
+        const user = new ChronoUser(dataUser.id, dataUser.userName, dataUser.emailAddress);
+        user.id = dataUser.id;
+        user.userName = dataUser.userName;
+        user.emailAddress = dataUser.emailAddress;
+        user.userLists = dataUser.userLists.map((dataList) => {
+          const list = new ChronoList(dataList._id, dataList._userId, dataList._name, dataList._description);
+          list.createdOn = parseISO(dataList.createdOn);
+          list.modifiedOn = parseISO(dataList.modifiedOn);
+          list.deletedOn = parseISO(dataList.deletedOn);
+          list.listItems = dataList.listItems.map((dataEntry) => {
+            const entry = new ChronoEntry(
+              dataEntry._id,
+              dataEntry._listId,
+              dataEntry._entryTitle,
+              parseISO(dataEntry._entryDate)
+            );
+            entry.createdOn = parseISO(dataEntry.createdOn);
+            entry.modifiedOn = parseISO(dataEntry.modifiedOn);
+            entry.deletedOn = parseISO(dataEntry.deletedOn);
+            return entry;
+          });
+          return list;
+        });
+        this.users.push(user);
+      });
     }
   }
 }
