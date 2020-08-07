@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { environment } from '../environments/environment';
 import { ListService } from './services/list.service';
 
 @Component({
@@ -13,4 +14,5 @@ export class AppComponent {
   constructor(private listService: ListService) {
     this.listService.getUsers().subscribe();
   }
+  currentApplicationVersion = environment.appVersion; // (npm run build) to automatically increment version patch number by 1
 }
