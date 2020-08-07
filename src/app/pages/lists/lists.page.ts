@@ -5,6 +5,9 @@ import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { ChronoUser } from 'src/app/components/user/chrono-user';
 import { ListService } from '../../services/list.service';
+import { UserDialogData } from '../user/dialog/user-dialog-data';
+import { UserDialogModel } from '../user/dialog/user-dialog-model';
+import { UserDialogComponent } from '../user/dialog/user-dialog.component';
 import { ListDialogData } from './dialog/list-dialog-data';
 import { ListDialogModel } from './dialog/list-dialog-model';
 import { ListDialogComponent } from './dialog/list-dialog.component';
@@ -61,6 +64,34 @@ export class ListsPage {
               this.router.navigate([this.selectedUser.userName, list.id]);
             })
           );
+        })
+      )
+      .subscribe();
+  }
+
+  updateUserDialog(): void {
+    const dialogRef = this.dialog.open<UserDialogComponent, UserDialogData>(UserDialogComponent, {
+      data: {
+        model: {
+          userName: this.selectedUser.userName,
+          emailAddress: this.selectedUser.emailAddress,
+        },
+        viewMode: 'update',
+      },
+    });
+
+    dialogRef
+      .afterClosed()
+      .pipe(
+        flatMap((model: UserDialogModel) => {
+          if (!model) {
+            return of(null);
+          }
+
+          this.selectedUser.userName = model.userName;
+          this.selectedUser.emailAddress = model.emailAddress;
+
+          return this.listService.save();
         })
       )
       .subscribe();

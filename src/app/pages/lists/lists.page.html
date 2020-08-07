@@ -1,3 +1,13 @@
+<h2>
+  User Name: {{ selectedUser.userName }}
+</h2>
+<h4>
+  User's e-mail address: {{ selectedUser.emailAddress }}
+</h4>
+
+<button mat-raised-button color="primary" (click)="updateUserDialog()">Update User Information</button>
+<br />
+
 <div *ngIf="selectedUser.userLists.length > 0 else noData">
   <h3>Your lists</h3>
   <button mat-raised-button color="primary" (click)="createListDialog()">Create a list</button>

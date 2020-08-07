@@ -12,11 +12,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EntryDialogComponent } from './pages/entries/dialog/entry-dialog.component';
-import { ListDialogComponent } from './pages/lists/dialog/list-dialog.component';
 import { EntriesPage } from './pages/entries/entries.page';
+import { ListDialogComponent } from './pages/lists/dialog/list-dialog.component';
 import { ListsPage } from './pages/lists/lists.page';
 import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
 import { CreateUserPage } from './pages/user/create-user.page';
+import { UserDialogComponent } from './pages/user/dialog/user-dialog.component';
 import { UsersPage } from './pages/user/users.page';
 
 @NgModule({
@@ -29,6 +30,7 @@ import { UsersPage } from './pages/user/users.page';
     ListsPage,
     PageNotFoundPage,
     UsersPage,
+    UserDialogComponent,
   ],
   imports: [
     BrowserModule,

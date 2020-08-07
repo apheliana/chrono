@@ -1,0 +1,19 @@
+<h3>User Menu</h3>
+<div mat-dialog-content>
+  <mat-form-field>
+    <mat-label>What's your user name?</mat-label>
+    <input matInput placeholder="User Name?" [(ngModel)]="data.model.userName" />
+  </mat-form-field>
+  <br />
+  <mat-form-field>
+    <mat-label>What's your e-mail?</mat-label>
+    <input matInput placeholder="e-mail?" [(ngModel)]="data.model.emailAddress" />
+  </mat-form-field>
+</div>
+
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button type="submit" color="primary" [mat-dialog-close]="data.model">
+    {{ data.viewMode === 'create' ? 'Create' : 'Update' }}
+  </button>
+</div>

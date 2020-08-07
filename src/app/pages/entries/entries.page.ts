@@ -4,14 +4,14 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { ChronoEntry } from '../../components/entry/chrono-entry';
-import { EntryDialogData } from './dialog/entry-dialog-data';
-import { EntryDialogModel } from './dialog/entry-dialog-model';
-import { EntryDialogComponent } from './dialog/entry-dialog.component';
 import { ChronoList } from '../../components/list/chrono-list';
+import { ListService } from '../../services/list.service';
 import { ListDialogData } from '../lists/dialog/list-dialog-data';
 import { ListDialogModel } from '../lists/dialog/list-dialog-model';
 import { ListDialogComponent } from '../lists/dialog/list-dialog.component';
-import { ListService } from '../../services/list.service';
+import { EntryDialogData } from './dialog/entry-dialog-data';
+import { EntryDialogModel } from './dialog/entry-dialog-model';
+import { EntryDialogComponent } from './dialog/entry-dialog.component';
 
 @Component({
   templateUrl: './entries.page.html',
