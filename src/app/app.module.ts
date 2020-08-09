@@ -9,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EntryDialogModule } from './entries/dialog/entry-dialog.component.module';
+import { ManageEntryDialogModule } from './entries/dialog/manage-entry.dialog.module';
 import { EntriesPage } from './entries/entries.page';
 import { ListDialogComponent } from './lists/dialog/list-dialog.component';
 import { ListsPage } from './lists/lists.page';
@@ -37,7 +37,7 @@ import { UsersPage } from './user/users.page';
     MatSelectModule,
     MatDialogModule,
     AppRoutingModule,
-    EntryDialogModule,
+    ManageEntryDialogModule,
   ],
   bootstrap: [AppComponent],
 })

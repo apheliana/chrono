@@ -3,20 +3,20 @@ import { MatDialog } from '@angular/material/dialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { action } from '@storybook/addon-actions';
 import { moduleMetadata } from '@storybook/angular';
-import { EntryDialogData } from './entry-dialog-data';
-import { EntryDialogModel } from './entry-dialog-model';
-import { EntryDialogComponent } from './entry-dialog.component';
-import { EntryDialogModule } from './entry-dialog.component.module';
+import { ManageEntryDialog } from './manage-entry.dialog';
+import { ManageEntryDialogData } from './manage-entry.dialog.data';
+import { ManageEntryDialogModel } from './manage-entry.dialog.model';
+import { ManageEntryDialogModule } from './manage-entry.dialog.module';
 
 @Component({
   template: '',
 })
-class DialogTesterComponent implements OnInit {
+class ManageEntryDialogComponent implements OnInit {
   @Input()
-  data: EntryDialogData = null;
+  data: ManageEntryDialogData = null;
 
   @Output()
-  afterClosed = new EventEmitter<EntryDialogModel>();
+  afterClosed = new EventEmitter<ManageEntryDialogModel>();
 
   constructor(private dialog: MatDialog) {}
 
@@ -25,9 +25,12 @@ class DialogTesterComponent implements OnInit {
   }
 
   private open(): void {
-    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData, EntryDialogModel>(EntryDialogComponent, {
-      data: this.data,
-    });
+    const dialogRef = this.dialog.open<ManageEntryDialog, ManageEntryDialogData, ManageEntryDialogModel>(
+      ManageEntryDialog,
+      {
+        data: this.data,
+      }
+    );
 
     dialogRef.afterClosed().subscribe((model) => {
       this.afterClosed.emit(model);
@@ -37,17 +40,17 @@ class DialogTesterComponent implements OnInit {
 
 export default {
   title: '2-Components/Entry dialog',
-  component: DialogTesterComponent,
+  component: ManageEntryDialogComponent,
   decorators: [
     moduleMetadata({
-      entryComponents: [EntryDialogComponent],
-      imports: [BrowserAnimationsModule, EntryDialogModule],
+      entryComponents: [ManageEntryDialog],
+      imports: [BrowserAnimationsModule, ManageEntryDialogModule],
     }),
   ],
 };
 
 export const Create = () => ({
-  component: DialogTesterComponent,
+  component: ManageEntryDialogComponent,
   props: {
     data: {
       model: {
@@ -61,7 +64,7 @@ export const Create = () => ({
 });
 
 export const Update = () => ({
-  component: DialogTesterComponent,
+  component: ManageEntryDialogComponent,
   props: {
     data: {
       model: {

@@ -9,9 +9,9 @@ import { ListDialogModel } from '../lists/dialog/list-dialog-model';
 import { ListDialogComponent } from '../lists/dialog/list-dialog.component';
 import { ChronoEntry } from '../models/chrono-entry';
 import { ChronoList } from '../models/chrono-list';
-import { EntryDialogData } from './dialog/entry-dialog-data';
-import { EntryDialogModel } from './dialog/entry-dialog-model';
-import { EntryDialogComponent } from './dialog/entry-dialog.component';
+import { ManageEntryDialog } from './dialog/manage-entry.dialog';
+import { ManageEntryDialogData } from './dialog/manage-entry.dialog.data';
+import { ManageEntryDialogModel } from './dialog/manage-entry.dialog.model';
 
 @Component({
   templateUrl: './entries.page.html',
@@ -45,15 +45,18 @@ export class EntriesPage {
   }
 
   createEntryDialog(): void {
-    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData, EntryDialogModel>(EntryDialogComponent, {
-      data: {
-        model: {
-          entryTitle: '',
-          entryDate: new Date(),
+    const dialogRef = this.dialog.open<ManageEntryDialog, ManageEntryDialogData, ManageEntryDialogModel>(
+      ManageEntryDialog,
+      {
+        data: {
+          model: {
+            entryTitle: '',
+            entryDate: new Date(),
+          },
+          viewMode: 'create',
         },
-        viewMode: 'create',
-      },
-    });
+      }
+    );
 
     dialogRef
       .afterClosed()
@@ -70,15 +73,18 @@ export class EntriesPage {
   }
 
   updateEntryDialog(item: ChronoEntry): void {
-    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData, EntryDialogModel>(EntryDialogComponent, {
-      data: {
-        model: {
-          entryTitle: item.entryTitle,
-          entryDate: item.entryDate,
+    const dialogRef = this.dialog.open<ManageEntryDialog, ManageEntryDialogData, ManageEntryDialogModel>(
+      ManageEntryDialog,
+      {
+        data: {
+          model: {
+            entryTitle: item.entryTitle,
+            entryDate: item.entryDate,
+          },
+          viewMode: 'update',
         },
-        viewMode: 'update',
-      },
-    });
+      }
+    );
 
     dialogRef
       .afterClosed()

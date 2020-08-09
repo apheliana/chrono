@@ -1,4 +1,4 @@
-export interface EntryDialogModel {
+export interface ManageEntryDialogModel {
   entryTitle: string;
   entryDate: Date;
 }

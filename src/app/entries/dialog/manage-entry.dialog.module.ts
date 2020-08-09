@@ -6,11 +6,11 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { EntryDialogComponent } from './entry-dialog.component';
+import { ManageEntryDialog } from './manage-entry.dialog';
 
 @NgModule({
-  declarations: [EntryDialogComponent],
-  exports: [EntryDialogComponent],
+  declarations: [ManageEntryDialog],
+  exports: [ManageEntryDialog],
   imports: [
     FormsModule,
     MatButtonModule,
@@ -21,4 +21,4 @@ import { EntryDialogComponent } from './entry-dialog.component';
     MatNativeDateModule,
   ],
 })
-export class EntryDialogModule {}
+export class ManageEntryDialogModule {}
