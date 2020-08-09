@@ -1,4 +1,4 @@
-import { ChronoEntryDto } from '../entry/chrono-entry-dto';
+import { ChronoEntryDto } from '../models/chrono-entry-dto';
 
 export interface ChronoListDto {
   _name: string;

@@ -1,4 +1,4 @@
-import { ChronoListDto } from '../list/chrono-list-dto';
+import { ChronoListDto } from './chrono-list-dto';
 
 export interface ChronoUserDto {
   id: number;

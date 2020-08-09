@@ -11,13 +11,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EntryDialogComponent } from './pages/entries/dialog/entry-dialog.component';
-import { EntriesPage } from './pages/entries/entries.page';
-import { ListDialogComponent } from './pages/lists/dialog/list-dialog.component';
-import { ListsPage } from './pages/lists/lists.page';
-import { CreateUserPage } from './pages/user/create-user.page';
-import { UserDialogComponent } from './pages/user/dialog/user-dialog.component';
-import { UsersPage } from './pages/user/users.page';
+import { EntryDialogComponent } from './entries/dialog/entry-dialog.component';
+import { EntriesPage } from './entries/entries.page';
+import { ListDialogComponent } from './lists/dialog/list-dialog.component';
+import { ListsPage } from './lists/lists.page';
+import { CreateUserPage } from './user/create-user.page';
+import { UserDialogComponent } from './user/dialog/user-dialog.component';
+import { UsersPage } from './user/users.page';
 
 @NgModule({
   declarations: [

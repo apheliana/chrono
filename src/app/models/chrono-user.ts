@@ -1,4 +1,4 @@
-import { ChronoList } from '../list/chrono-list';
+import { ChronoList } from './chrono-list';
 
 export class ChronoUser {
   id = 0;

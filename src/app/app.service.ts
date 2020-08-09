@@ -2,15 +2,15 @@ import { Injectable } from '@angular/core';
 import { parseISO } from 'date-fns';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { ChronoEntry } from '../components/entry/chrono-entry';
-import { ChronoList } from '../components/list/chrono-list';
-import { ChronoUser } from '../components/user/chrono-user';
-import { ChronoUserDto } from '../components/user/chrono-user-dto';
+import { ChronoEntry } from './models/chrono-entry';
+import { ChronoList } from './models/chrono-list';
+import { ChronoUser } from './models/chrono-user';
+import { ChronoUserDto } from './models/chrono-user-dto';
 
 @Injectable({
   providedIn: 'root',
 })
-export class ListService {
+export class AppService {
   readonly users: ChronoUser[] = [];
   private readonly localStorageKey = '@forCrowd/chrono/data@v1.4';
 

@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
-import { ChronoUser } from 'src/app/components/user/chrono-user';
-import { ListService } from '../../services/list.service';
+import { ChronoUser } from 'src/app/models/chrono-user';
+import { AppService } from '../app.service';
 import { UserDialogData } from '../user/dialog/user-dialog-data';
 import { UserDialogModel } from '../user/dialog/user-dialog-model';
 import { UserDialogComponent } from '../user/dialog/user-dialog.component';
@@ -22,7 +22,7 @@ export class ListsPage {
   constructor(
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private listService: ListService,
+    private appService: AppService,
     private router: Router
   ) {
     const userName = this.activatedRoute.snapshot.params['user-name'];
@@ -32,7 +32,7 @@ export class ListsPage {
       return;
     }
 
-    this.selectedUser = this.listService.getUserByName(userName);
+    this.selectedUser = this.appService.getUserByName(userName);
 
     if (!this.selectedUser) {
       this.router.navigate(['not-found']);
@@ -59,7 +59,7 @@ export class ListsPage {
             return of(null);
           }
 
-          return this.listService.createList(this.selectedUser, model.name, model.description).pipe(
+          return this.appService.createList(this.selectedUser, model.name, model.description).pipe(
             tap((list) => {
               this.router.navigate([this.selectedUser.userName, list.id]);
             })
@@ -91,7 +91,7 @@ export class ListsPage {
           this.selectedUser.userName = model.userName;
           this.selectedUser.emailAddress = model.emailAddress;
 
-          return this.listService.save();
+          return this.appService.save();
         })
       )
       .subscribe();

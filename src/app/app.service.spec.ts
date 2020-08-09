@@ -1,12 +1,12 @@
-import { ChronoList } from '../components/list/chrono-list';
-import { ChronoUser } from '../components/user/chrono-user';
-import { ListService } from './list.service';
+import { AppService } from './app.service';
+import { ChronoList } from './models/chrono-list';
+import { ChronoUser } from './models/chrono-user';
 
-describe('ListService', () => {
-  let service: ListService;
+describe('AppService', () => {
+  let service: AppService;
 
   beforeEach(() => {
-    service = new ListService();
+    service = new AppService();
     const user = new ChronoUser(0, '', '');
     service.users.push(user);
   });

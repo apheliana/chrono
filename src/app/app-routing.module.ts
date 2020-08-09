@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EntriesPage } from './pages/entries/entries.page';
-import { ListsPage } from './pages/lists/lists.page';
-import { CreateUserPage } from './pages/user/create-user.page';
-import { UsersPage } from './pages/user/users.page';
+import { EntriesPage } from './entries/entries.page';
+import { ListsPage } from './lists/lists.page';
+import { CreateUserPage } from './user/create-user.page';
+import { UsersPage } from './user/users.page';
 
 const routes: Routes = [
   {
     path: 'not-found',
-    loadChildren: () => import('./pages/not-found/not-found.module').then((m) => m.NotFoundModule),
+    loadChildren: () => import('./not-found/not-found.module').then((m) => m.NotFoundModule),
   },
   { path: 'create-user', component: CreateUserPage },
   { path: ':user-name/:list-id', component: EntriesPage },

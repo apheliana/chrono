@@ -3,12 +3,12 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-import { ChronoEntry } from '../../components/entry/chrono-entry';
-import { ChronoList } from '../../components/list/chrono-list';
-import { ListService } from '../../services/list.service';
+import { AppService } from '../app.service';
 import { ListDialogData } from '../lists/dialog/list-dialog-data';
 import { ListDialogModel } from '../lists/dialog/list-dialog-model';
 import { ListDialogComponent } from '../lists/dialog/list-dialog.component';
+import { ChronoEntry } from '../models/chrono-entry';
+import { ChronoList } from '../models/chrono-list';
 import { EntryDialogData } from './dialog/entry-dialog-data';
 import { EntryDialogModel } from './dialog/entry-dialog-model';
 import { EntryDialogComponent } from './dialog/entry-dialog.component';
@@ -23,7 +23,7 @@ export class EntriesPage {
   constructor(
     private activatedRoute: ActivatedRoute,
     private dialog: MatDialog,
-    private listService: ListService,
+    private appService: AppService,
     private router: Router
   ) {
     const listIdParam = this.activatedRoute.snapshot.params['list-id'];
@@ -34,7 +34,7 @@ export class EntriesPage {
     }
 
     const listId = Number(listIdParam);
-    const list = this.listService.getListByUserName(userName, listId);
+    const list = this.appService.getListByUserName(userName, listId);
 
     if (!list) {
       this.router.navigate(['not-found']);
@@ -63,7 +63,7 @@ export class EntriesPage {
             return of(null);
           }
 
-          return this.listService.createEntry(this.selectedList, model.entryTitle, model.entryDate).pipe();
+          return this.appService.createEntry(this.selectedList, model.entryTitle, model.entryDate).pipe();
         })
       )
       .subscribe();
@@ -89,7 +89,7 @@ export class EntriesPage {
           }
           item.entryTitle = model.entryTitle;
           item.entryDate = model.entryDate;
-          return this.listService.save();
+          return this.appService.save();
         })
       )
       .subscribe();
@@ -117,7 +117,7 @@ export class EntriesPage {
           this.selectedList.name = model.name;
           this.selectedList.description = model.description;
 
-          return this.listService.save();
+          return this.appService.save();
         })
       )
       .subscribe();

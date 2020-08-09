@@ -3,8 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
-import { ChronoUser } from '../../components/user/chrono-user';
-import { ListService } from '../../services/list.service';
+import { AppService } from '../app.service';
+import { ChronoUser } from '../models/chrono-user';
 import { UserDialogData } from './dialog/user-dialog-data';
 import { UserDialogModel } from './dialog/user-dialog-model';
 import { UserDialogComponent } from './dialog/user-dialog.component';
@@ -15,10 +15,10 @@ import { UserDialogComponent } from './dialog/user-dialog.component';
 })
 export class UsersPage {
   get users(): ChronoUser[] {
-    return this.listService.users;
+    return this.appService.users;
   }
 
-  constructor(private dialog: MatDialog, private listService: ListService, private router: Router) {}
+  constructor(private dialog: MatDialog, private appService: AppService, private router: Router) {}
 
   createUserDialog(): void {
     const dialogRef = this.dialog.open<UserDialogComponent, UserDialogData>(UserDialogComponent, {
@@ -39,7 +39,7 @@ export class UsersPage {
             return of(null);
           }
 
-          return this.listService.createUser(model.userName, model.emailAddress).pipe(
+          return this.appService.createUser(model.userName, model.emailAddress).pipe(
             tap(() => {
               this.router.navigate([model.userName]);
             })

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { ChronoUser } from 'src/app/components/user/chrono-user';
-import { ListService } from 'src/app/services/list.service';
+import { AppService } from 'src/app/app.service';
+import { ChronoUser } from 'src/app/models/chrono-user';
 
 @Component({
   styleUrls: ['./create-user.page.scss'],
@@ -10,14 +10,14 @@ import { ListService } from 'src/app/services/list.service';
 export class CreateUserPage {
   emailAddress = '';
   userName = '';
-  constructor(private listService: ListService, private router: Router) {}
+  constructor(private appService: AppService, private router: Router) {}
 
   get users(): ChronoUser[] {
-    return this.listService.users;
+    return this.appService.users;
   }
 
   createUser(): void {
-    this.listService.createUser(this.userName, this.emailAddress);
+    this.appService.createUser(this.userName, this.emailAddress);
     this.router.navigate([this.userName]);
   }
 }
