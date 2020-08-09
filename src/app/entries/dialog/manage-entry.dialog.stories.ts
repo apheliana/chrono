@@ -39,7 +39,7 @@ class ManageEntryDialogComponent implements OnInit {
 }
 
 export default {
-  title: '2-Components/Entry dialog',
+  title: '2-Components/Manage entry dialog',
   component: ManageEntryDialogComponent,
   decorators: [
     moduleMetadata({
