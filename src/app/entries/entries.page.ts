@@ -22,18 +22,18 @@ export class EntriesPage {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private dialog: MatDialog,
     private appService: AppService,
+    private dialog: MatDialog,
     private router: Router
   ) {
-    const listIdParam = this.activatedRoute.snapshot.params['list-id'];
     const userName = this.activatedRoute.snapshot.params['user-name'];
-    if (!listIdParam) {
+    const listId = Number(this.activatedRoute.snapshot.params['list-id']);
+
+    if (!userName || !listId) {
       this.router.navigate(['not-found']);
       return;
     }
 
-    const listId = Number(listIdParam);
     const list = this.appService.getListByUserName(userName, listId);
 
     if (!list) {
