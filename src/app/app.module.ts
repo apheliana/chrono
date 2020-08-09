@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { MatNativeDateModule } from '@angular/material/core';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -11,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EntryDialogComponent } from './entries/dialog/entry-dialog.component';
+import { EntryDialogModule } from './entries/dialog/entry-dialog.component.module';
 import { EntriesPage } from './entries/entries.page';
 import { ListDialogComponent } from './lists/dialog/list-dialog.component';
 import { ListsPage } from './lists/lists.page';
@@ -24,7 +22,6 @@ import { UsersPage } from './user/users.page';
     AppComponent,
     CreateUserPage,
     EntriesPage,
-    EntryDialogComponent,
     ListDialogComponent,
     ListsPage,
     UsersPage,
@@ -34,15 +31,13 @@ import { UsersPage } from './user/users.page';
     BrowserModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,
     MatButtonModule,
-    MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
-    MatNativeDateModule,
     MatSelectModule,
     MatDialogModule,
     AppRoutingModule,
+    EntryDialogModule,
   ],
   bootstrap: [AppComponent],
 })
