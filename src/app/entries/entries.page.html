@@ -1,26 +1,27 @@
-<h2>
-  List details: {{ selectedList.name }}
-</h2>
-<h4>
-  List description: {{ selectedList.description }}
-</h4>
+<div *ngIf="selectedList">
+  <h2>
+    List details: {{ selectedList.name }}
+  </h2>
+  <h4>
+    List description: {{ selectedList.description }}
+  </h4>
 
-<button mat-raised-button color="primary" (click)="updateListDialog()">Update List</button>
+  <button mat-raised-button color="primary" (click)="updateListDialog()">Update List</button>
 
-<div *ngIf="selectedList.listItems.length > 0 else noData">
-  <h3>Items of your list</h3>
-  <ul>
-    <li *ngFor="let item of selectedList.listItems">
-      {{ item.entryTitle }} - {{ item.entryDateText }} -
-      <button mat-raised-button color="primary" (click)="updateEntryDialog(item)">Update</button>
-    </li>
-  </ul>
-  <button mat-raised-button color="primary" (click)="createEntryDialog()">Create an entry</button>
-</div>
-
-<ng-template #noData>
-  <div class="no-data">
-    You have no entries yet 😱
+  <div *ngIf="selectedList.listItems.length > 0 else noData">
+    <h3>Items of your list</h3>
+    <ul>
+      <li *ngFor="let item of selectedList.listItems">
+        {{ item.entryTitle }} - {{ item.entryDateText }} -
+        <button mat-raised-button color="primary" (click)="updateEntryDialog(item)">Update</button>
+      </li>
+    </ul>
     <button mat-raised-button color="primary" (click)="createEntryDialog()">Create an entry</button>
   </div>
-</ng-template>
+  <ng-template #noData>
+    <div class="no-data">
+      You have no entries yet 😱
+      <button mat-raised-button color="primary" (click)="createEntryDialog()">Create an entry</button>
+    </div>
+  </ng-template>
+</div>
