@@ -45,7 +45,7 @@ export class EntriesPage {
   }
 
   createEntryDialog(): void {
-    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData>(EntryDialogComponent, {
+    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData, EntryDialogModel>(EntryDialogComponent, {
       data: {
         model: {
           entryTitle: '',
@@ -58,7 +58,7 @@ export class EntriesPage {
     dialogRef
       .afterClosed()
       .pipe(
-        flatMap((model: EntryDialogModel) => {
+        flatMap((model) => {
           if (!model) {
             return of(null);
           }
@@ -70,7 +70,7 @@ export class EntriesPage {
   }
 
   updateEntryDialog(item: ChronoEntry): void {
-    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData>(EntryDialogComponent, {
+    const dialogRef = this.dialog.open<EntryDialogComponent, EntryDialogData, EntryDialogModel>(EntryDialogComponent, {
       data: {
         model: {
           entryTitle: item.entryTitle,
@@ -83,7 +83,7 @@ export class EntriesPage {
     dialogRef
       .afterClosed()
       .pipe(
-        flatMap((model: EntryDialogModel) => {
+        flatMap((model) => {
           if (!model) {
             return of(null);
           }
@@ -96,7 +96,7 @@ export class EntriesPage {
   }
 
   updateListDialog(): void {
-    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData>(ListDialogComponent, {
+    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData, ListDialogModel>(ListDialogComponent, {
       data: {
         model: {
           name: this.selectedList.name,
@@ -109,7 +109,7 @@ export class EntriesPage {
     dialogRef
       .afterClosed()
       .pipe(
-        flatMap((model: ListDialogModel) => {
+        flatMap((model) => {
           if (!model) {
             return of(null);
           }

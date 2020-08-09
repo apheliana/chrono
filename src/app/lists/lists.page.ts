@@ -41,7 +41,7 @@ export class ListsPage {
   }
 
   createListDialog(): void {
-    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData>(ListDialogComponent, {
+    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData, ListDialogModel>(ListDialogComponent, {
       data: {
         model: {
           name: '',
@@ -54,7 +54,7 @@ export class ListsPage {
     dialogRef
       .afterClosed()
       .pipe(
-        flatMap((model: ListDialogModel) => {
+        flatMap((model) => {
           if (!model) {
             return of(null);
           }
@@ -70,7 +70,7 @@ export class ListsPage {
   }
 
   updateUserDialog(): void {
-    const dialogRef = this.dialog.open<UserDialogComponent, UserDialogData>(UserDialogComponent, {
+    const dialogRef = this.dialog.open<UserDialogComponent, UserDialogData, UserDialogModel>(UserDialogComponent, {
       data: {
         model: {
           userName: this.selectedUser.userName,
@@ -83,7 +83,7 @@ export class ListsPage {
     dialogRef
       .afterClosed()
       .pipe(
-        flatMap((model: UserDialogModel) => {
+        flatMap((model) => {
           if (!model) {
             return of(null);
           }

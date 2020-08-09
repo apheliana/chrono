@@ -21,7 +21,7 @@ export class UsersPage {
   constructor(private dialog: MatDialog, private appService: AppService, private router: Router) {}
 
   createUserDialog(): void {
-    const dialogRef = this.dialog.open<UserDialogComponent, UserDialogData>(UserDialogComponent, {
+    const dialogRef = this.dialog.open<UserDialogComponent, UserDialogData, UserDialogModel>(UserDialogComponent, {
       data: {
         model: {
           userName: '',
@@ -34,7 +34,7 @@ export class UsersPage {
     dialogRef
       .afterClosed()
       .pipe(
-        flatMap((model: UserDialogModel) => {
+        flatMap((model) => {
           if (!model) {
             return of(null);
           }
