@@ -28,14 +28,14 @@ export class ListsPage {
     const userName = this.activatedRoute.snapshot.params['user-name'];
 
     if (!userName) {
-      this.router.navigate(['/404']);
+      this.router.navigate(['not-found']);
       return;
     }
 
     this.selectedUser = this.listService.getUserByName(userName);
 
     if (!this.selectedUser) {
-      this.router.navigate(['/404']);
+      this.router.navigate(['not-found']);
       return;
     }
   }

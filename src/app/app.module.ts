@@ -15,7 +15,6 @@ import { EntryDialogComponent } from './pages/entries/dialog/entry-dialog.compon
 import { EntriesPage } from './pages/entries/entries.page';
 import { ListDialogComponent } from './pages/lists/dialog/list-dialog.component';
 import { ListsPage } from './pages/lists/lists.page';
-import { PageNotFoundPage } from './pages/page-not-found/page-not-found.page';
 import { CreateUserPage } from './pages/user/create-user.page';
 import { UserDialogComponent } from './pages/user/dialog/user-dialog.component';
 import { UsersPage } from './pages/user/users.page';
@@ -28,13 +27,11 @@ import { UsersPage } from './pages/user/users.page';
     EntryDialogComponent,
     ListDialogComponent,
     ListsPage,
-    PageNotFoundPage,
     UsersPage,
     UserDialogComponent,
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
     ReactiveFormsModule,
@@ -45,6 +42,7 @@ import { UsersPage } from './pages/user/users.page';
     MatNativeDateModule,
     MatSelectModule,
     MatDialogModule,
+    AppRoutingModule,
   ],
   bootstrap: [AppComponent],
 })

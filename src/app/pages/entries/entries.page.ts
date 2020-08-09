@@ -29,7 +29,7 @@ export class EntriesPage {
     const listIdParam = this.activatedRoute.snapshot.params['list-id'];
     const userName = this.activatedRoute.snapshot.params['user-name'];
     if (!listIdParam) {
-      this.router.navigate(['/404']);
+      this.router.navigate(['not-found']);
       return;
     }
 
@@ -37,7 +37,7 @@ export class EntriesPage {
     const list = this.listService.getListByUserName(userName, listId);
 
     if (!list) {
-      this.router.navigate(['/404']);
+      this.router.navigate(['not-found']);
       return;
     }
 
