@@ -3,14 +3,14 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
+import { AppService } from 'src/app/app.service';
 import { ChronoUser } from 'src/app/models/chrono-user';
-import { AppService } from '../app.service';
-import { UserDialogData } from '../user/dialog/user-dialog-data';
-import { UserDialogModel } from '../user/dialog/user-dialog-model';
-import { UserDialogComponent } from '../user/dialog/user-dialog.component';
-import { ManageListDialog } from './manage-list/manage-list.dialog';
-import { ManageListDialogData } from './manage-list/manage-list.dialog.data';
-import { ManageListDialogModel } from './manage-list/manage-list.dialog.model';
+import { UserDialogData } from 'src/app/user/dialog/user-dialog-data';
+import { UserDialogModel } from 'src/app/user/dialog/user-dialog-model';
+import { UserDialogComponent } from 'src/app/user/dialog/user-dialog.component';
+import { ManageListDialog } from '../manage-list/manage-list.dialog';
+import { ManageListDialogData } from '../manage-list/manage-list.dialog.data';
+import { ManageListDialogModel } from '../manage-list/manage-list.dialog.model';
 
 @Component({
   templateUrl: './lists.page.html',
