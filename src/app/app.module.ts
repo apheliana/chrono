@@ -9,8 +9,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EntriesPage } from './entries/entries/entries.page';
-import { ManageEntryDialogModule } from './entries/manage-entry/manage-entry.dialog.module';
 import { ListDialogComponent } from './lists/dialog/list-dialog.component';
 import { ListsPage } from './lists/lists.page';
 import { CreateUserPage } from './user/create-user.page';
@@ -18,15 +16,7 @@ import { UserDialogComponent } from './user/dialog/user-dialog.component';
 import { UsersPage } from './user/users.page';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CreateUserPage,
-    EntriesPage,
-    ListDialogComponent,
-    ListsPage,
-    UsersPage,
-    UserDialogComponent,
-  ],
+  declarations: [AppComponent, CreateUserPage, ListDialogComponent, ListsPage, UsersPage, UserDialogComponent],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
@@ -37,7 +27,6 @@ import { UsersPage } from './user/users.page';
     MatSelectModule,
     MatDialogModule,
     AppRoutingModule,
-    ManageEntryDialogModule,
   ],
   bootstrap: [AppComponent],
 })
