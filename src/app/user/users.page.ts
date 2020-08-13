@@ -5,9 +5,9 @@ import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { AppService } from '../app.service';
 import { ChronoUser } from '../models/chrono-user';
-import { UserDialog } from './dialog/user-dialog';
-import { UserDialogData } from './dialog/user-dialog.data';
-import { UserDialogModel } from './dialog/user-dialog.model';
+import { UserDialog } from './dialog/user.dialog';
+import { UserDialogData } from './dialog/user.dialog.data';
+import { UserDialogModel } from './dialog/user.dialog.model';
 
 @Component({
   templateUrl: './users.page.html',

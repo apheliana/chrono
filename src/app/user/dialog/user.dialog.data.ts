@@ -1,4 +1,4 @@
-import { UserDialogModel } from './user-dialog.model';
+import { UserDialogModel } from './user.dialog.model';
 
 export interface UserDialogData {
   model: UserDialogModel;

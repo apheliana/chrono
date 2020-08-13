@@ -9,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserDialog } from './user/dialog/user-dialog';
+import { UserDialog } from './user/dialog/user.dialog';
 import { UsersPage } from './user/users.page';
 
 @NgModule({
