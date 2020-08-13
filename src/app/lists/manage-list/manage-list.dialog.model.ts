@@ -1,4 +1,4 @@
-export interface ListDialogModel {
+export interface ManageListDialogModel {
   name: string;
   description: string;
 }

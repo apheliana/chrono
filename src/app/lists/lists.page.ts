@@ -8,9 +8,9 @@ import { AppService } from '../app.service';
 import { UserDialogData } from '../user/dialog/user-dialog-data';
 import { UserDialogModel } from '../user/dialog/user-dialog-model';
 import { UserDialogComponent } from '../user/dialog/user-dialog.component';
-import { ListDialogData } from './dialog/list-dialog-data';
-import { ListDialogModel } from './dialog/list-dialog-model';
-import { ListDialogComponent } from './dialog/list-dialog.component';
+import { ManageListDialog } from './manage-list/manage-list.dialog';
+import { ManageListDialogData } from './manage-list/manage-list.dialog.data';
+import { ManageListDialogModel } from './manage-list/manage-list.dialog.model';
 
 @Component({
   templateUrl: './lists.page.html',
@@ -41,15 +41,18 @@ export class ListsPage {
   }
 
   createListDialog(): void {
-    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData, ListDialogModel>(ListDialogComponent, {
-      data: {
-        model: {
-          name: '',
-          description: '',
+    const dialogRef = this.dialog.open<ManageListDialog, ManageListDialogData, ManageListDialogModel>(
+      ManageListDialog,
+      {
+        data: {
+          model: {
+            name: '',
+            description: '',
+          },
+          viewMode: 'create',
         },
-        viewMode: 'create',
-      },
-    });
+      }
+    );
 
     dialogRef
       .afterClosed()

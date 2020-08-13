@@ -4,9 +4,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
-import { ListDialogData } from 'src/app/lists/dialog/list-dialog-data';
-import { ListDialogModel } from 'src/app/lists/dialog/list-dialog-model';
-import { ListDialogComponent } from 'src/app/lists/dialog/list-dialog.component';
+import { ManageListDialog } from 'src/app/lists/manage-list/manage-list.dialog';
+import { ManageListDialogData } from 'src/app/lists/manage-list/manage-list.dialog.data';
+import { ManageListDialogModel } from 'src/app/lists/manage-list/manage-list.dialog.model';
 import { ChronoEntry } from 'src/app/models/chrono-entry';
 import { ChronoList } from 'src/app/models/chrono-list';
 import { ManageEntryDialog } from '../manage-entry/manage-entry.dialog';
@@ -102,15 +102,18 @@ export class EntriesPage {
   }
 
   updateListDialog(): void {
-    const dialogRef = this.dialog.open<ListDialogComponent, ListDialogData, ListDialogModel>(ListDialogComponent, {
-      data: {
-        model: {
-          name: this.selectedList.name,
-          description: this.selectedList.description,
+    const dialogRef = this.dialog.open<ManageListDialog, ManageListDialogData, ManageListDialogModel>(
+      ManageListDialog,
+      {
+        data: {
+          model: {
+            name: this.selectedList.name,
+            description: this.selectedList.description,
+          },
+          viewMode: 'update',
         },
-        viewMode: 'update',
-      },
-    });
+      }
+    );
 
     dialogRef
       .afterClosed()
