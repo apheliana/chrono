@@ -3,15 +3,15 @@ import { MatDialog } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
-import { AppService } from '../app.service';
-import { ListDialogData } from '../lists/dialog/list-dialog-data';
-import { ListDialogModel } from '../lists/dialog/list-dialog-model';
-import { ListDialogComponent } from '../lists/dialog/list-dialog.component';
-import { ChronoEntry } from '../models/chrono-entry';
-import { ChronoList } from '../models/chrono-list';
-import { ManageEntryDialog } from './manage-entry/manage-entry.dialog';
-import { ManageEntryDialogData } from './manage-entry/manage-entry.dialog.data';
-import { ManageEntryDialogModel } from './manage-entry/manage-entry.dialog.model';
+import { AppService } from 'src/app/app.service';
+import { ListDialogData } from 'src/app/lists/dialog/list-dialog-data';
+import { ListDialogModel } from 'src/app/lists/dialog/list-dialog-model';
+import { ListDialogComponent } from 'src/app/lists/dialog/list-dialog.component';
+import { ChronoEntry } from 'src/app/models/chrono-entry';
+import { ChronoList } from 'src/app/models/chrono-list';
+import { ManageEntryDialog } from '../manage-entry/manage-entry.dialog';
+import { ManageEntryDialogData } from '../manage-entry/manage-entry.dialog.data';
+import { ManageEntryDialogModel } from '../manage-entry/manage-entry.dialog.model';
 
 @Component({
   templateUrl: './entries.page.html',

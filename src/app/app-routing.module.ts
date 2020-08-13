@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { EntriesPage } from './entries/entries.page';
+import { EntriesPage } from './entries/entries/entries.page';
 import { ListsPage } from './lists/lists.page';
 import { CreateUserPage } from './user/create-user.page';
 import { UsersPage } from './user/users.page';

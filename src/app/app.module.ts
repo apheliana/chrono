@@ -9,7 +9,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EntriesPage } from './entries/entries.page';
+import { EntriesPage } from './entries/entries/entries.page';
 import { ManageEntryDialogModule } from './entries/manage-entry/manage-entry.dialog.module';
 import { ListDialogComponent } from './lists/dialog/list-dialog.component';
 import { ListsPage } from './lists/lists.page';

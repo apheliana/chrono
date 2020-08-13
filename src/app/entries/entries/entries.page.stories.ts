@@ -4,12 +4,12 @@ import { ActivatedRoute } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { moduleMetadata } from '@storybook/angular';
 import { of } from 'rxjs';
-import { AppService } from '../app.service';
-import { ChronoEntry } from '../models/chrono-entry';
-import { ChronoList } from '../models/chrono-list';
+import { AppService } from 'src/app/app.service';
+import { ChronoEntry } from 'src/app/models/chrono-entry';
+import { ChronoList } from 'src/app/models/chrono-list';
+import { ManageEntryDialog } from '../manage-entry/manage-entry.dialog';
 import { EntriesPage } from './entries.page';
 import { EntriesPageModule } from './entries.page.module';
-import { ManageEntryDialog } from './manage-entry/manage-entry.dialog';
 
 @Component({
   template: '',
