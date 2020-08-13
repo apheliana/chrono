@@ -53,6 +53,11 @@ export class AppService {
 
   getListByUserName(userName: string, listId: number): ChronoList {
     const foundUser = this.getUserByName(userName);
+
+    if (!foundUser) {
+      throw new Error(`No user found by user name: ${userName}`);
+    }
+
     const foundList = foundUser.userLists.find((list) => list.id === listId);
 
     if (!foundList) {

@@ -9,9 +9,9 @@ import { ListDialogModel } from '../lists/dialog/list-dialog-model';
 import { ListDialogComponent } from '../lists/dialog/list-dialog.component';
 import { ChronoEntry } from '../models/chrono-entry';
 import { ChronoList } from '../models/chrono-list';
-import { ManageEntryDialog } from './dialog/manage-entry.dialog';
-import { ManageEntryDialogData } from './dialog/manage-entry.dialog.data';
-import { ManageEntryDialogModel } from './dialog/manage-entry.dialog.model';
+import { ManageEntryDialog } from './manage-entry/manage-entry.dialog';
+import { ManageEntryDialogData } from './manage-entry/manage-entry.dialog.data';
+import { ManageEntryDialogModel } from './manage-entry/manage-entry.dialog.model';
 
 @Component({
   templateUrl: './entries.page.html',
