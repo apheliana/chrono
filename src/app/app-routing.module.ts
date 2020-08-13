@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { UsersPage } from './user/users.page';
 
 const routes: Routes = [
   {
@@ -15,7 +14,10 @@ const routes: Routes = [
     path: ':user-name',
     loadChildren: () => import('./lists/lists.module').then((m) => m.ListsModule),
   },
-  { path: '', component: UsersPage },
+  {
+    path: '',
+    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
+  },
   {
     path: '**',
     redirectTo: '/not-found',
