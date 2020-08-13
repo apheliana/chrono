@@ -9,11 +9,11 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { UserDialogComponent } from './user/dialog/user-dialog.component';
+import { UserDialog } from './user/dialog/user-dialog';
 import { UsersPage } from './user/users.page';
 
 @NgModule({
-  declarations: [AppComponent, UsersPage, UserDialogComponent],
+  declarations: [AppComponent, UsersPage, UserDialog],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,

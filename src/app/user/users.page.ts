@@ -5,9 +5,9 @@ import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { AppService } from '../app.service';
 import { ChronoUser } from '../models/chrono-user';
-import { UserDialogData } from './dialog/user-dialog-data';
-import { UserDialogModel } from './dialog/user-dialog-model';
-import { UserDialogComponent } from './dialog/user-dialog.component';
+import { UserDialog } from './dialog/user-dialog';
+import { UserDialogData } from './dialog/user-dialog.data';
+import { UserDialogModel } from './dialog/user-dialog.model';
 
 @Component({
   templateUrl: './users.page.html',
@@ -21,7 +21,7 @@ export class UsersPage {
   constructor(private dialog: MatDialog, private appService: AppService, private router: Router) {}
 
   createUserDialog(): void {
-    const dialogRef = this.dialog.open<UserDialogComponent, UserDialogData, UserDialogModel>(UserDialogComponent, {
+    const dialogRef = this.dialog.open<UserDialog, UserDialogData, UserDialogModel>(UserDialog, {
       data: {
         model: {
           userName: '',
