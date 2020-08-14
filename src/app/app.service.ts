@@ -84,9 +84,6 @@ export class AppService {
     } else {
       appDataLists.forEach((dataUser) => {
         const user = new ChronoUser(dataUser.id, dataUser.userName, dataUser.emailAddress);
-        user.id = dataUser.id;
-        user.userName = dataUser.userName;
-        user.emailAddress = dataUser.emailAddress;
         user.userLists = dataUser.userLists.map((dataList) => {
           const list = new ChronoList(dataList._id, dataList._userId, dataList._name, dataList._description);
           list.createdOn = parseISO(dataList.createdOn);
