@@ -5,6 +5,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { moduleMetadata } from '@storybook/angular';
 import { of } from 'rxjs';
 import { AppService } from 'src/app/app.service';
+import { ManageListDialog } from 'src/app/lists/manage-list/manage-list.dialog';
 import { ChronoEntry } from 'src/app/models/chrono-entry';
 import { ChronoList } from 'src/app/models/chrono-list';
 import { ManageEntryDialog } from '../manage-entry/manage-entry.dialog';
@@ -21,7 +22,7 @@ export default {
   component: EntriesPage,
   decorators: [
     moduleMetadata({
-      entryComponents: [ManageEntryDialog],
+      entryComponents: [ManageEntryDialog, ManageListDialog],
       declarations: [BlankComponent],
       imports: [
         BrowserAnimationsModule,
