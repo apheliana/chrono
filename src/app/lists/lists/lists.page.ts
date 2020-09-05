@@ -32,12 +32,14 @@ export class ListsPage {
       return;
     }
 
-    this.selectedUser = this.appService.getUserByName(userName);
+    this.appService.getChronoUser(userName).subscribe((user) => {
+      this.selectedUser = user;
 
-    if (!this.selectedUser) {
-      this.router.navigate(['not-found']);
-      return;
-    }
+      if (!this.selectedUser) {
+        this.router.navigate(['not-found']);
+        return;
+      }
+    });
   }
 
   createListDialog(): void {
@@ -94,7 +96,7 @@ export class ListsPage {
           this.selectedUser.userName = model.userName;
           this.selectedUser.emailAddress = model.emailAddress;
 
-          return this.appService.save();
+          return this.appService.updateChronoList();
         })
       )
       .subscribe();

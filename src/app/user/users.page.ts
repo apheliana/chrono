@@ -14,11 +14,13 @@ import { UserDialogModel } from './dialog/user.dialog.model';
   styleUrls: ['./users.page.scss'],
 })
 export class UsersPage {
-  get users(): ChronoUser[] {
-    return this.appService.users;
-  }
+  users: ChronoUser[] = [];
 
-  constructor(private dialog: MatDialog, private appService: AppService, private router: Router) {}
+  constructor(private dialog: MatDialog, private appService: AppService, private router: Router) {
+    this.appService.getChronoUsers().subscribe((users) => {
+      this.users = users;
+    });
+  }
 
   createUserDialog(): void {
     const dialogRef = this.dialog.open<UserDialog, UserDialogData, UserDialogModel>(UserDialog, {

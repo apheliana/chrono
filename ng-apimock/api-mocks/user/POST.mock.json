@@ -1,0 +1,20 @@
+{
+  "name": "api/v1/user/POST",
+  "responses": {
+    "default": {
+      "status": 200,
+      "default": true,
+      "data": {}
+    },
+    "bad-request": {
+      "status": 400
+    },
+    "not-found": {
+      "status": 404
+    }
+  },
+  "request": {
+    "url": "api/user",
+    "method": "POST"
+  }
+}

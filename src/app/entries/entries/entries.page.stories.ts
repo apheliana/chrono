@@ -46,6 +46,7 @@ export default {
           provide: AppService,
           useValue: {
             createEntry: () => of(null),
+            // TODO 👇
             getListByUserName: () => {
               const list = new ChronoList(1, 1, 'List', 'Description');
               list.listItems.push(new ChronoEntry(1, 1, 'title A', new Date()));

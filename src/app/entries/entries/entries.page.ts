@@ -34,14 +34,14 @@ export class EntriesPage {
       return;
     }
 
-    const list = this.appService.getListByUserName(userName, listId);
+    this.appService.getChronoList(userName, listId).subscribe((list) => {
+      if (!list) {
+        this.router.navigate(['not-found']);
+        return;
+      }
 
-    if (!list) {
-      this.router.navigate(['not-found']);
-      return;
-    }
-
-    this.selectedList = list;
+      this.selectedList = list;
+    });
   }
 
   createEntryDialog(): void {
@@ -95,7 +95,7 @@ export class EntriesPage {
           }
           item.entryTitle = model.entryTitle;
           item.entryDate = model.entryDate;
-          return this.appService.save();
+          return this.appService.updateChronoEntry();
         })
       )
       .subscribe();
@@ -126,7 +126,7 @@ export class EntriesPage {
           this.selectedList.name = model.name;
           this.selectedList.description = model.description;
 
-          return this.appService.save();
+          return this.appService.updateChronoList();
         })
       )
       .subscribe();

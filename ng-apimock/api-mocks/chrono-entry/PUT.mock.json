@@ -1,0 +1,20 @@
+{
+  "name": "api/v1/chrono-entry/PUT",
+  "responses": {
+    "default": {
+      "status": 200,
+      "default": true,
+      "data": {}
+    },
+    "bad-request": {
+      "status": 400
+    },
+    "not-found": {
+      "status": 404
+    }
+  },
+  "request": {
+    "url": "api/chrono-entry",
+    "method": "PUT"
+  }
+}

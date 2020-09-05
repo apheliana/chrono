@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 
 export class ChronoEntry {
   createdOn = new Date();
@@ -58,7 +58,7 @@ export class ChronoEntry {
   private _id = 0;
   private _listId = 0;
 
-  constructor(id: number, listId: number, entryTitle: string, entryDate: Date) {
+  constructor(id: number, listId: number, entryTitle: string, entryDate: Date, entryDateString: string = null) {
     if (typeof id === 'undefined' || id === null) {
       throw new Error('Invalid argument');
     }
@@ -66,6 +66,7 @@ export class ChronoEntry {
     this._id = id;
     this.listId = listId;
     this.entryTitle = entryTitle;
-    this.entryDate = entryDate;
+    // TODO 👇
+    this.entryDate = entryDate || parseISO(entryDateString);
   }
 }

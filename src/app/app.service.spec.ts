@@ -1,23 +1,24 @@
+import { HttpClientModule } from '@angular/common/http';
+import { async, inject, TestBed } from '@angular/core/testing';
 import { AppService } from './app.service';
 import { ChronoList } from './models/chrono-list';
 import { ChronoUser } from './models/chrono-user';
 
 describe('AppService', () => {
-  let service: AppService;
-
-  beforeEach(() => {
-    service = new AppService();
-    const user = new ChronoUser(0, '', '');
-    service.users.push(user);
-  });
+  beforeEach(async(() => {
+    TestBed.configureTestingModule({
+      imports: [HttpClientModule],
+      providers: [AppService],
+    });
+  }));
 
   // Sanity
-  it('should create', () => {
+  it('should create', inject([AppService], (service: AppService) => {
     expect(service).toBeDefined();
-  });
+  }));
 
-  it('should create a list with valid arguments', () => {
-    const user = service.users[0];
+  it('should create a list with valid arguments', inject([AppService], (service: AppService) => {
+    const user = new ChronoUser(0, 'username', 'email');
     service.createList(user, 'name').subscribe((list) => {
       expect(user.userLists.length).toEqual(1);
       expect(user.userLists[0]).toBe(list);
@@ -25,9 +26,9 @@ describe('AppService', () => {
       expect(list.name).toEqual('name');
       expect(list.description).toEqual(null);
     });
-  });
+  }));
 
-  it('should create an entry with valid arguments', () => {
+  it('should create an entry with valid arguments', inject([AppService], (service: AppService) => {
     const list = new ChronoList(0, 0, 'name', 'description');
     const entryDate = new Date();
     service.createEntry(list, 'entryTitle', entryDate).subscribe((entry) => {
@@ -37,7 +38,7 @@ describe('AppService', () => {
       expect(entry.entryTitle).toEqual('entryTitle');
       expect(entry.entryDate).toEqual(entryDate);
     });
-  });
+  }));
 
   // TODO Replace these tests with "getByUserName"?
   // describe('getListById tests', () => {

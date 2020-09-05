@@ -4,7 +4,8 @@ export class ChronoUser {
   id = 0;
   userName = '';
   emailAddress = '';
-  userLists: ChronoList[] = [];
+  readonly userLists: ChronoList[] = [];
+  userListsRetrieved = false; // TODO Hacky solution I
 
   constructor(id: number, userName: string, emailAddress: string) {
     this.id = id;

@@ -1,0 +1,39 @@
+{
+  "name": "api/v1/chrono-list/GET-coni2k-1",
+  "responses": {
+    "default": {
+      "status": 200,
+      "default": true,
+      "data": {
+        "id": 1,
+        "userId": 2,
+        "name": "Books",
+        "description": null,
+        "listItems": [
+          {
+            "id": 1,
+            "listId": 1,
+            "entryTitle": "Sandman",
+            "entryDate": "2020-09-06T10:18:00.000Z"
+          },
+          {
+            "id": 2,
+            "listId": 1,
+            "entryTitle": "Big Data",
+            "entryDate": "2020-08-06T10:18:00.000Z"
+          }
+        ]
+      }
+    },
+    "bad-request": {
+      "status": 400
+    },
+    "not-found": {
+      "status": 404
+    }
+  },
+  "request": {
+    "url": "api/chrono-list/coni2k/1",
+    "method": "GET"
+  }
+}

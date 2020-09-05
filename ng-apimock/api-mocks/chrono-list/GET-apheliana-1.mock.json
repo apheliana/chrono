@@ -1,0 +1,39 @@
+{
+  "name": "api/v1/chrono-list/GET-apheliana-1",
+  "responses": {
+    "default": {
+      "status": 200,
+      "default": true,
+      "data": {
+        "id": 1,
+        "userId": 1,
+        "name": "Books",
+        "description": null,
+        "listItems": [
+          {
+            "id": 1,
+            "listId": 1,
+            "entryTitle": "Sapiens",
+            "entryDate": "2020-09-01T10:34:47.259Z"
+          },
+          {
+            "id": 2,
+            "listId": 1,
+            "entryTitle": "Go ile zihin terbiyesi",
+            "entryDate": "2020-08-01T10:34:47.259Z"
+          }
+        ]
+      }
+    },
+    "bad-request": {
+      "status": 400
+    },
+    "not-found": {
+      "status": 404
+    }
+  },
+  "request": {
+    "url": "api/chrono-list/apheliana/1",
+    "method": "GET"
+  }
+}

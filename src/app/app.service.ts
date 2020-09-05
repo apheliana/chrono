@@ -1,110 +1,161 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { parseISO } from 'date-fns';
 import { Observable, of } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { flatMap, map, shareReplay } from 'rxjs/operators';
 import { ChronoEntry } from './models/chrono-entry';
 import { ChronoList } from './models/chrono-list';
+import { ChronoListDto } from './models/chrono-list-dto';
 import { ChronoUser } from './models/chrono-user';
-import { ChronoUserDto } from './models/chrono-user-dto';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AppService {
-  readonly users: ChronoUser[] = [];
-  private readonly localStorageKey = '@forCrowd/chrono/data@v1.4';
+  private usersCache$: Observable<ChronoUser[]>;
+
+  constructor(private httpClient: HttpClient) {}
 
   createEntry(list: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
-    const newEntry = new ChronoEntry(new Date().getTime(), list.id, entryTitle, entryDate);
+    const newEntry = new ChronoEntry(new Date().getTime(), list.id, entryTitle, entryDate, null);
     list.listItems.push(newEntry);
 
     // TODO We may have to sort the items when there's a new entry
 
-    return this.save().pipe(map(() => newEntry));
+    const url = 'api/chrono-entry';
+
+    return this.httpClient.post<ChronoEntry>(url, list).pipe(
+      map((response) => {
+        return newEntry;
+      })
+    );
   }
 
   createList(user: ChronoUser, name: string, description: string = null): Observable<ChronoList> {
-    // TODO Temporarily solution until we have a proper back-end
     const list = new ChronoList(new Date().getTime(), user.id, name, description);
-
+    list.listItemsRetrieved = true;
     user.userLists.push(list);
 
-    return this.save().pipe(map(() => list));
+    const url = 'api/chrono-list';
+
+    return this.httpClient.post<ChronoList>(url, list).pipe(
+      map((response) => {
+        return list;
+      })
+    );
   }
 
-  createUser(userName: string, emailAddress: string) {
-    const user = new ChronoUser(new Date().getTime(), userName, emailAddress);
-    this.users.push(user);
-    return this.save().pipe(map(() => user));
+  createUser(userName: string, emailAddress: string): Observable<ChronoUser> {
+    return this.getChronoUsers().pipe(
+      flatMap((users) => {
+        const user = new ChronoUser(new Date().getTime(), userName, emailAddress);
+        users.push(user);
+
+        const url = 'api/user';
+
+        return this.httpClient.post<ChronoUser>(url, user).pipe(
+          map((response) => {
+            return user;
+          })
+        );
+      })
+    );
   }
 
-  getUsers(): Observable<ChronoUser[]> {
-    this.init(); // TODO This should load from the API
-    return of(this.users);
-  }
-
-  getUserByName(userName: string): ChronoUser {
-    const foundUser = this.users.find((user) => user.userName === userName);
-    if (foundUser === null) {
-      throw new Error(`No user found called: ${userName}`);
-    }
-    return foundUser;
-  }
-
-  getListByUserName(userName: string, listId: number): ChronoList {
-    const foundUser = this.getUserByName(userName);
-
-    if (!foundUser) {
-      throw new Error(`No user found by user name: ${userName}`);
-    }
-
-    const foundList = foundUser.userLists.find((list) => list.id === listId);
-
-    if (!foundList) {
-      throw new Error(`No list found by listId: ${listId}`);
-    }
-
-    return foundList;
-  }
-
-  save(): Observable<void> {
-    localStorage.setItem(this.localStorageKey, JSON.stringify(this.users));
-    return of(null);
-  }
-
-  private init(): void {
-    const appDataJSON = localStorage.getItem(this.localStorageKey);
-    const appDataLists = JSON.parse(appDataJSON) as ChronoUserDto[];
-
-    if (appDataLists === null) {
-      // const apheliana = new ChronoUser(new Date().getTime(), 'apheliana', 'fatih@gmail.com');
-      // const coni2k = new ChronoUser(new Date().getTime() + 1, 'coni2k', 'serkanholat@hotmail.com');
-      // this.users.push(apheliana);
-      // this.users.push(coni2k);
-    } else {
-      appDataLists.forEach((dataUser) => {
-        const user = new ChronoUser(dataUser.id, dataUser.userName, dataUser.emailAddress);
-        user.userLists = dataUser.userLists.map((dataList) => {
-          const list = new ChronoList(dataList._id, dataList._userId, dataList._name, dataList._description);
-          list.createdOn = parseISO(dataList.createdOn);
-          list.modifiedOn = parseISO(dataList.modifiedOn);
-          list.deletedOn = parseISO(dataList.deletedOn);
-          list.listItems = dataList.listItems.map((dataEntry) => {
-            const entry = new ChronoEntry(
-              dataEntry._id,
-              dataEntry._listId,
-              dataEntry._entryTitle,
-              parseISO(dataEntry._entryDate)
-            );
-            entry.createdOn = parseISO(dataEntry.createdOn);
-            entry.modifiedOn = parseISO(dataEntry.modifiedOn);
-            entry.deletedOn = parseISO(dataEntry.deletedOn);
-            return entry;
+  getChronoUsers(): Observable<ChronoUser[]> {
+    if (!this.usersCache$) {
+      const url = 'api/user/all';
+      this.usersCache$ = this.httpClient.get<ChronoUser[]>(url).pipe(
+        map((result) => {
+          return result.map((item) => {
+            return new ChronoUser(item.id, item.userName, '');
           });
-          return list;
-        });
-        this.users.push(user);
-      });
+        }),
+        shareReplay()
+      );
     }
+
+    return this.usersCache$;
+  }
+
+  getChronoUser(userName: string): Observable<ChronoUser> {
+    return this.usersCache$.pipe(
+      flatMap((users) => {
+        let user = users.find((item) => item.userName === userName);
+
+        if (user && user.userListsRetrieved) {
+          return of(user);
+        }
+
+        const url = `api/user/${userName}`;
+
+        return this.httpClient.get<ChronoUser>(url).pipe(
+          map((response) => {
+            if (!response) {
+              // TODO Double check this approach
+              throw new Error(`No user found by username: ${userName}`);
+            }
+
+            if (!user) {
+              user = new ChronoUser(response.id, response.userName, response.emailAddress);
+              users.push(user);
+            }
+
+            response.userLists.forEach((item) => {
+              const list = new ChronoList(item.id, item.userId, item.name, item.description);
+              user.userLists.push(list);
+            });
+            user.userListsRetrieved = true;
+
+            return user;
+          })
+        );
+      })
+    );
+  }
+
+  getChronoList(userName: string, listId: number): Observable<ChronoList> {
+    return this.getChronoUser(userName).pipe(
+      flatMap((user) => {
+        const url = `api/chrono-list/${userName}/${listId}`;
+
+        let list = user.userLists.find((item) => item.id === listId);
+
+        if (list && list.listItemsRetrieved) {
+          return of(list);
+        }
+
+        return this.httpClient.get<ChronoListDto>(url).pipe(
+          map((response) => {
+            if (!response) {
+              // TODO Double check this approach
+              throw new Error(`No list found by listId: ${listId}`);
+            }
+
+            if (!list) {
+              list = new ChronoList(response.id, response.userId, response.name, response.description);
+              user.userLists.push(list);
+            }
+
+            response.listItems.forEach((item) => {
+              const entry = new ChronoEntry(item.id, item.listId, item.entryTitle, null, item.entryDate);
+              list.listItems.push(entry);
+            });
+            list.listItemsRetrieved = true;
+
+            return list;
+          })
+        );
+      })
+    );
+  }
+
+  updateChronoEntry(): Observable<void> {
+    const url = 'api/chrono-entry';
+    return this.httpClient.put<void>(url, {});
+  }
+
+  updateChronoList(): Observable<void> {
+    const url = 'api/chrono-list';
+    return this.httpClient.put<void>(url, {});
   }
 }

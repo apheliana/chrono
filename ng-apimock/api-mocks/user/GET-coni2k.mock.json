@@ -1,0 +1,31 @@
+{
+  "name": "api/v1/user/GET-coni2k",
+  "responses": {
+    "default": {
+      "status": 200,
+      "default": true,
+      "data": {
+        "id": 2,
+        "userName": "coni2k",
+        "userLists": [
+          {
+            "userId": 2,
+            "id": 1,
+            "name": "Books",
+            "description": "The books that I read"
+          }
+        ]
+      }
+    },
+    "bad-request": {
+      "status": 400
+    },
+    "not-found": {
+      "status": 404
+    }
+  },
+  "request": {
+    "url": "api/user/coni2k",
+    "method": "GET"
+  }
+}

@@ -3,12 +3,13 @@
   "version": "0.1.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "serve": "ng serve --proxy-config ./ng-apimock/proxy.config.json -o",
     "prebuild": "npm --no-git-tag-version version patch",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "start-ng-apimock": "ts-node ./ng-apimock/server.ts",
     "storybook": "start-storybook -p 6006",
     "build-storybook": "build-storybook"
   },
@@ -34,6 +35,8 @@
     "@angular/cli": "~10.0.0",
     "@angular/compiler-cli": "~10.0.0",
     "@babel/core": "^7.11.1",
+    "@ng-apimock/core": "^2.3.2",
+    "@ng-apimock/dev-interface": "^1.0.7",
     "@storybook/addon-actions": "^5.3.19",
     "@storybook/addon-links": "^5.3.19",
     "@storybook/addon-notes": "^5.3.19",
