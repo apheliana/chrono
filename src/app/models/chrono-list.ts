@@ -58,6 +58,7 @@ export class ChronoList {
   private _name = '';
   private _userId = 0;
 
+  // TODO Create a constructor that takes "jsonData" as a parameter
   constructor(id: number, userId: number, name: string, description: string = null) {
     this.userId = userId;
     this.id = id;

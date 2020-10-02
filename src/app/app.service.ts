@@ -16,16 +16,15 @@ export class AppService {
   constructor(private httpClient: HttpClient) {}
 
   createEntry(list: ChronoList, entryTitle: string, entryDate: Date): Observable<ChronoEntry> {
-    const newEntry = new ChronoEntry(new Date().getTime(), list.id, entryTitle, entryDate, null);
-    list.listItems.push(newEntry);
+    const entry = new ChronoEntry(new Date().getTime(), list.id, entryTitle, entryDate, null);
 
     // TODO We may have to sort the items when there's a new entry
 
     const url = 'api/chrono-entry';
-
-    return this.httpClient.post<ChronoEntry>(url, list).pipe(
+    return this.httpClient.post<ChronoEntry>(url, entry).pipe(
       map((response) => {
-        return newEntry;
+        list.listItems.push(entry);
+        return entry;
       })
     );
   }
@@ -33,12 +32,11 @@ export class AppService {
   createList(user: ChronoUser, name: string, description: string = null): Observable<ChronoList> {
     const list = new ChronoList(new Date().getTime(), user.id, name, description);
     list.listItemsRetrieved = true;
-    user.userLists.push(list);
 
     const url = 'api/chrono-list';
-
     return this.httpClient.post<ChronoList>(url, list).pipe(
       map((response) => {
+        user.userLists.push(list);
         return list;
       })
     );
@@ -51,7 +49,6 @@ export class AppService {
         users.push(user);
 
         const url = 'api/user';
-
         return this.httpClient.post<ChronoUser>(url, user).pipe(
           map((response) => {
             return user;
@@ -87,7 +84,6 @@ export class AppService {
         }
 
         const url = `api/user/${userName}`;
-
         return this.httpClient.get<ChronoUser>(url).pipe(
           map((response) => {
             if (!response) {
