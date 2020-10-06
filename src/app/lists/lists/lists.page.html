@@ -1,17 +1,33 @@
+<div>
+  <label>Who's viewing the page? </label>
+  <mat-radio-group [(ngModel)]="loggedInUser">
+    <mat-radio-button [value]="true">User</mat-radio-button>
+    <mat-radio-button [value]="false">Guest</mat-radio-button>
+  </mat-radio-group>
+</div>
+<br />
+
 <div *ngIf="selectedUser">
-  <h2>
-    User Name: {{ selectedUser.userName }}
-  </h2>
-  <h4>
-    User's e-mail address: {{ selectedUser.emailAddress }}
-  </h4>
-
-  <button mat-raised-button color="primary" (click)="updateUserDialog()">Update User Information</button>
+  <!-- User Dashboard -->
+  <div *ngIf="loggedInUser">
+    <h2>Dashboard</h2>
+    <ul>
+      <li>Number of Lists: {{selectedUser.userLists.length}}</li>
+      <li *ngFor="let list of selectedUser.userLists">{{ list.name }} - {{ list.listItems.length }} Entries</li>
+    </ul>
+  </div>
+  <!-- User Details -->
+  <h2>User Name: {{ selectedUser.userName }}</h2>
+  <h4 *ngIf="loggedInUser">User's e-mail address: {{ selectedUser.emailAddress }}</h4>
+  <!--TODO 'use showMail instead of loggedInUser' Add: "Do you want others to see your mail?" to user properties page-->
+  <button *ngIf="loggedInUser" mat-raised-button color="primary" (click)="updateUserDialog()">
+    Update User Information
+  </button>
   <br />
-
+  <!-- User's Lists -->
   <div *ngIf="selectedUser.userLists.length > 0 else noData">
-    <h3>Your lists</h3>
-    <button mat-raised-button color="primary" (click)="createListDialog()">Create a list</button>
+    <h3>Lists</h3>
+    <button *ngIf="loggedInUser" mat-raised-button color="primary" (click)="createListDialog()">Create a list</button>
     <ul>
       <li *ngFor="let list of selectedUser.userLists">
         <a routerLink="/{{ selectedUser.userName }}/{{ list.id }}">{{ list.name }}</a> - {{ list.description }} - {{
@@ -21,8 +37,8 @@
   </div>
   <ng-template #noData>
     <div class="no-data">
-      You have no lists yet 😱
-      <button mat-raised-button color="primary" (click)="createListDialog()">Create a list</button>
+      No lists yet 😱
+      <button *ngIf="loggedInUser" mat-raised-button color="primary" (click)="createListDialog()">Create a list</button>
     </div>
   </ng-template>
 </div>

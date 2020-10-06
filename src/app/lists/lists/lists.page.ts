@@ -18,6 +18,7 @@ import { ManageListDialogModel } from '../manage-list/manage-list.dialog.model';
 })
 export class ListsPage {
   selectedUser: ChronoUser = null;
+  loggedInUser = false;
 
   constructor(
     private activatedRoute: ActivatedRoute,
