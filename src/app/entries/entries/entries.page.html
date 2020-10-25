@@ -8,8 +8,10 @@
     <h3>Items of your list</h3>
     <ul>
       <li *ngFor="let item of selectedList.listItems">
-        {{ item.entryTitle }} - {{ item.entryDateText }} -
-        <button mat-raised-button *ngIf="loggedInUser" color="primary" (click)="updateEntryDialog(item)">Update</button>
+        <button *ngIf="loggedInUser" mat-icon-button color="primary" (click)="updateEntryDialog(item)">
+          <mat-icon aria-hidden="false" aria-label="Update">create</mat-icon>
+        </button>
+        {{ item.entryTitle }} - {{ item.entryDateText }}
       </li>
     </ul>
     <button mat-raised-button *ngIf="loggedInUser" color="primary" (click)="createEntryDialog()">
