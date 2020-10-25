@@ -75,7 +75,7 @@ export class AppService {
   }
 
   getChronoUser(userName: string): Observable<ChronoUser> {
-    return this.usersCache$.pipe(
+    return this.getChronoUsers().pipe(
       flatMap((users) => {
         let user = users.find((item) => item.userName === userName);
 
