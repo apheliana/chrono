@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
+import { AuthService } from 'src/app/auth.service';
 import { ManageListDialog } from 'src/app/lists/manage-list/manage-list.dialog';
 import { ManageListDialogData } from 'src/app/lists/manage-list/manage-list.dialog.data';
 import { ManageListDialogModel } from 'src/app/lists/manage-list/manage-list.dialog.model';
@@ -20,8 +21,13 @@ import { ManageEntryDialogModel } from '../manage-entry/manage-entry.dialog.mode
 export class EntriesPage {
   selectedList: ChronoList = null;
 
+  get loggedInUser(): boolean {
+    return this.authService.user.id === this.selectedList?.userId;
+  }
+
   constructor(
     private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
     private appService: AppService,
     private dialog: MatDialog,
     private router: Router
