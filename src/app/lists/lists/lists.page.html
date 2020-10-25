@@ -1,12 +1,3 @@
-<div>
-  <label>Who's viewing the page? </label>
-  <mat-radio-group [(ngModel)]="loggedInUser">
-    <mat-radio-button [value]="true">User</mat-radio-button>
-    <mat-radio-button [value]="false">Guest</mat-radio-button>
-  </mat-radio-group>
-</div>
-<br />
-
 <div *ngIf="selectedUser">
   <!-- User Dashboard -->
   <div *ngIf="loggedInUser">

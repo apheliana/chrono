@@ -1,9 +1,12 @@
 <div class="body-content">
-  <h2>Welcome to Chrono</h2>
-
-  <a routerLink="/">Home</a>
+  <header>
+    <h2>
+      <a routerLink="/">Chrono</a>
+    </h2>
+    <div>User: {{ authService.user.userName }}</div>
+  </header>
 
   <router-outlet></router-outlet>
 </div>
 
-<div id="footer">v{{ currentApplicationVersion }}</div>
+<footer>v{{ currentApplicationVersion }}</footer>

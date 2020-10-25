@@ -1,8 +1,13 @@
 .body-content {
   padding: 0 16px;
+
+  header {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
-#footer {
+footer {
   align-items: center;
   background-color: lightgrey;
   bottom: 0;

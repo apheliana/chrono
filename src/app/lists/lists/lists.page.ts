@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 import { flatMap, tap } from 'rxjs/operators';
 import { AppService } from 'src/app/app.service';
+import { AuthService } from 'src/app/auth.service';
 import { ChronoUser } from 'src/app/models/chrono-user';
 import { UserDialog } from 'src/app/user/dialog/user.dialog';
 import { UserDialogData } from 'src/app/user/dialog/user.dialog.data';
@@ -18,10 +19,14 @@ import { ManageListDialogModel } from '../manage-list/manage-list.dialog.model';
 })
 export class ListsPage {
   selectedUser: ChronoUser = null;
-  loggedInUser = false;
+
+  get loggedInUser(): boolean {
+    return this.authService.user.id === this.selectedUser?.id;
+  }
 
   constructor(
     private activatedRoute: ActivatedRoute,
+    private authService: AuthService,
     private dialog: MatDialog,
     private appService: AppService,
     private router: Router
